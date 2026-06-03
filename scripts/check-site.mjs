@@ -91,6 +91,9 @@ for (const file of ["index.html", "ja/index.html"]) {
   if (/popup-preview-(en|ja)\.png|mock-top|Actual popup screenshot|実際のポップアップ画面/.test(content)) {
     failures.push(`Landing preview must not use raw screenshots or fake window controls in ${file}`);
   }
+  if (/preview-button/.test(content)) {
+    failures.push(`Landing preview controls must not look like clickable buttons in ${file}`);
+  }
 }
 
 const japaneseHome = await readFile(path.join(root, "ja/index.html"), "utf8");
