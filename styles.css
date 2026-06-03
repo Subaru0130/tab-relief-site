@@ -323,100 +323,171 @@ button:focus-visible {
   width: 11px;
 }
 
-.mock-hero {
-  background: linear-gradient(135deg, #f8fbff, #eaf3ff);
+.mock-app-hero,
+.mock-memory-card,
+.mock-subscription-card {
+  background: rgba(255, 255, 255, 0.94);
   border: 1px solid var(--line);
-  border-radius: 24px;
+  border-radius: 22px;
+  padding: 18px;
+}
+
+.mock-app-hero {
+  align-items: center;
   display: flex;
-  gap: 18px;
+  gap: 16px;
   justify-content: space-between;
-  padding: 22px;
 }
 
-.mock-label {
-  color: var(--muted);
-  font-size: 0.82rem;
-  font-weight: 800;
-  margin-bottom: 4px;
+.mock-label,
+.mock-memory-card > span,
+.mock-subscription-card > span {
+  color: var(--primary-strong);
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  margin-bottom: 6px;
 }
 
-.mock-hero strong {
-  font-size: 2.6rem;
-  letter-spacing: -0.05em;
+.mock-app-hero strong {
+  display: block;
+  font-size: 1.7rem;
+  letter-spacing: -0.055em;
   line-height: 1;
 }
 
-.mock-badge {
-  align-self: flex-start;
-  background: var(--success-soft);
+.mock-subtitle {
+  color: var(--muted);
+  display: block;
+  font-size: 0.84rem;
+  margin-top: 6px;
+}
+
+.mock-mark {
+  align-items: center;
+  background: var(--primary);
+  border-radius: 20px;
+  box-shadow: 0 16px 34px rgba(31, 111, 235, 0.28);
+  display: flex;
+  flex: 0 0 auto;
+  height: 58px;
+  justify-content: center;
+  width: 58px;
+}
+
+.mock-mark span,
+.mock-mark::before,
+.mock-mark::after {
+  background: #fff;
   border-radius: 999px;
-  color: var(--success);
+  content: "";
+  display: block;
+  height: 7px;
+  width: 30px;
+}
+
+.mock-mark {
+  flex-direction: column;
+  gap: 5px;
+}
+
+.mock-stat-grid,
+.mock-memory-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.mock-stat-grid {
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 12px;
+}
+
+.mock-stat-grid div,
+.mock-memory-grid div {
+  background: #f8fbff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 13px;
+}
+
+.mock-stat-grid span,
+.mock-memory-grid small {
+  color: var(--muted);
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 850;
+}
+
+.mock-stat-grid strong,
+.mock-memory-grid strong {
+  display: block;
+  font-size: 1.45rem;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  margin-top: 6px;
+}
+
+.mock-memory-card,
+.mock-subscription-card,
+.mock-action-stack {
+  margin-top: 12px;
+}
+
+.mock-memory-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.mock-memory-card p,
+.mock-subscription-card p,
+.mock-action small {
+  color: var(--muted);
   font-size: 0.78rem;
-  font-weight: 900;
-  padding: 8px 10px;
+  line-height: 1.4;
+  margin: 8px 0 0;
+}
+
+.mock-subscription-card {
+  background: linear-gradient(180deg, #eef5ff 0%, #ffffff 100%);
+  border-color: rgba(31, 111, 235, 0.24);
+}
+
+.mock-subscription-card strong {
+  display: block;
+  font-size: 1.28rem;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
 }
 
 .mock-action {
   align-items: center;
-  background: var(--primary-soft);
-  border: 1px solid rgba(31, 111, 235, 0.2);
-  border-radius: 18px;
-  color: var(--primary-strong);
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: var(--text);
   cursor: default;
   display: flex;
+  flex-direction: column;
   font: inherit;
   font-weight: 900;
   justify-content: center;
-  margin: 14px 0;
-  min-height: 58px;
+  margin-top: 9px;
+  min-height: 48px;
+  padding: 10px;
   pointer-events: none;
+  text-align: center;
   user-select: none;
   width: 100%;
 }
 
-.mock-grid {
-  display: grid;
-  gap: 12px;
-  grid-template-columns: 1fr 1fr;
+.mock-action.is-primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
 }
 
-.mock-grid div,
-.mock-list {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 16px;
-}
-
-.mock-grid span {
-  color: var(--muted);
-  display: block;
-  font-size: 0.8rem;
-  font-weight: 800;
-}
-
-.mock-grid strong {
-  display: block;
-  font-size: 1.55rem;
-  letter-spacing: -0.04em;
-  margin-top: 4px;
-}
-
-.mock-list {
-  color: var(--muted);
-  display: grid;
-  font-size: 0.88rem;
-  gap: 12px;
-  margin-top: 12px;
-  max-width: 100%;
-}
-
-.mock-list div {
-  align-items: flex-start;
-  display: flex;
-  gap: 9px;
-  min-width: 0;
-  overflow-wrap: anywhere;
+.mock-action.is-primary small {
+  color: rgba(255, 255, 255, 0.88);
 }
 
 .dot {
