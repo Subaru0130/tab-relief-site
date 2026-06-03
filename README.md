@@ -9,6 +9,8 @@ It is separate from the private extension repository on purpose: the public site
 - `index.html`: product landing page and pricing
 - `privacy.html`: privacy policy for Chrome Web Store and Stripe review
 - `terms.html`: terms, refund, and billing expectations
+- `ja/`: Japanese landing page, privacy policy, and terms
+- `language.js`: browser-language detection and manual language preference
 - `404.html`: GitHub Pages fallback page
 
 ## Local check
@@ -24,7 +26,7 @@ $env:CHROME_BIN="C:\Path\To\chrome.exe"
 npm run capture
 ```
 
-Screenshots are written to `.tmp/home-desktop.png` and `.tmp/home-mobile.png`.
+Screenshots are written to `.tmp/`, including English and Japanese desktop/mobile previews.
 
 ## Publish with GitHub Pages
 
@@ -48,6 +50,7 @@ The page uses a restrained product-marketing layout inspired by mature SaaS page
 - Neutral surfaces and consistent card spacing so the content feels calmer than the extension problem it solves.
 - Legal, payment, and refund information is visible instead of hidden, which helps Stripe review and user trust.
 - Mobile layout collapses into a single-column flow with full-width primary actions.
+- English remains the default review URL, while Japanese users can be routed to `/ja/` through browser-language detection or a visible language switch.
 
 ## Update before final launch
 

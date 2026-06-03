@@ -105,7 +105,8 @@ a {
 }
 
 .nav-links a,
-.footer-links a {
+.footer-links a,
+.language-switch a {
   border-radius: 999px;
   color: var(--muted);
   font-size: 0.94rem;
@@ -115,9 +116,30 @@ a {
 }
 
 .nav-links a:hover,
-.footer-links a:hover {
+.footer-links a:hover,
+.language-switch a:hover {
   background: var(--primary-soft);
   color: var(--primary-strong);
+}
+
+.language-switch {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+}
+
+.language-switch a {
+  min-height: 36px;
+  padding: 7px 12px;
+}
+
+.language-switch a.is-current {
+  background: var(--primary);
+  color: #ffffff;
 }
 
 .hero {
@@ -156,6 +178,17 @@ h1 {
   line-height: 0.93;
   margin-bottom: 24px;
   max-width: 790px;
+}
+
+.ja-hero-title {
+  font-size: clamp(3.2rem, 6vw, 5rem);
+  letter-spacing: -0.075em;
+  line-height: 0.98;
+  word-break: keep-all;
+}
+
+.ja-hero-title span {
+  display: block;
 }
 
 h2 {
@@ -509,6 +542,7 @@ button:focus-visible {
   font-weight: 900;
   height: 28px;
   justify-content: center;
+  font-size: 0.68rem;
   width: 28px;
 }
 
@@ -694,6 +728,14 @@ button:focus-visible {
     flex-wrap: wrap;
   }
 
+  .language-switch {
+    width: 100%;
+  }
+
+  .language-switch a {
+    flex: 1;
+  }
+
   .nav-links a,
   .footer-links a {
     padding-left: 10px;
@@ -709,6 +751,11 @@ button:focus-visible {
   h1 {
     font-size: clamp(2.35rem, 10.5vw, 2.75rem);
     letter-spacing: -0.065em;
+  }
+
+  .ja-hero-title {
+    font-size: clamp(2.35rem, 10.4vw, 3.05rem);
+    line-height: 1.04;
   }
 
   h2 {

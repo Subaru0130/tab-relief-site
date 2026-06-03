@@ -7,7 +7,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const outDir = path.join(root, ".tmp");
 const profileDir = path.join(outDir, "chrome-profile");
 const chromeBin = process.env.CHROME_BIN || "chrome";
-const pageUrl = pathToFileURL(path.join(root, "index.html")).toString();
+const pageUrl = `${pathToFileURL(path.join(root, "index.html")).toString()}?lang=en`;
+const jaPageUrl = `${pathToFileURL(path.join(root, "ja", "index.html")).toString()}?lang=ja`;
 
 await mkdir(outDir, { recursive: true });
 await rm(profileDir, { recursive: true, force: true });
@@ -61,6 +62,28 @@ try {
     height: 1600,
     mobile: true
   });
+  await capture(client, {
+    name: "home-ja-desktop.png",
+    width: 1440,
+    height: 1200,
+    mobile: false,
+    url: jaPageUrl
+  });
+  await capture(client, {
+    name: "home-ja-full-desktop.png",
+    width: 1440,
+    height: 1200,
+    mobile: false,
+    fullPage: true,
+    url: jaPageUrl
+  });
+  await capture(client, {
+    name: "home-ja-mobile.png",
+    width: 390,
+    height: 1600,
+    mobile: true,
+    url: jaPageUrl
+  });
 } finally {
   client.close();
   chrome.kill();
@@ -76,7 +99,9 @@ async function capture(client, viewport) {
     mobile: viewport.mobile
   });
   const load = onceEvent(client, "Page.loadEventFired");
-  await send(client, "Page.navigate", { url: `${pageUrl}?v=${Date.now()}` });
+  const targetUrl = viewport.url || pageUrl;
+  const separator = targetUrl.includes("?") ? "&" : "?";
+  await send(client, "Page.navigate", { url: `${targetUrl}${separator}v=${Date.now()}` });
   await load;
   await send(client, "Runtime.evaluate", {
     expression: "document.fonts ? document.fonts.ready : Promise.resolve()",
