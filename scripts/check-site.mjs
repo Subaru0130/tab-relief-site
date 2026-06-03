@@ -14,6 +14,8 @@ const requiredFiles = [
   "404.html",
   "styles.css",
   "assets/mark.svg",
+  "assets/popup-preview-en.png",
+  "assets/popup-preview-ja.png",
   "robots.txt",
   "sitemap.xml"
 ];
@@ -26,9 +28,8 @@ const checks = [
   ["payment processors", "index.html", /ExtensionPay and Stripe/i],
   ["english install CTA", "index.html", /Install from Chrome Web Store/],
   ["english install section", "index.html", /Chrome Web Store listing coming soon/],
-  ["english actual popup preview", "index.html", /Actual popup preview/],
-  ["english popup memory preview", "index.html", /Memory impact/],
-  ["english popup trial preview", "index.html", /Start 14-day free trial/],
+  ["english actual popup screenshot label", "index.html", /Actual popup screenshot/],
+  ["english actual popup screenshot asset", "index.html", /assets\/popup-preview-en\.png/],
   ["privacy link", "index.html", /privacy\.html/],
   ["terms link", "index.html", /terms\.html/],
   ["english language switch", "index.html", /data-language-choice="ja"/],
@@ -39,9 +40,8 @@ const checks = [
   ["japanese home title", "ja/index.html", /Chromeを軽く/],
   ["japanese install CTA", "ja/index.html", /Chrome Web Storeでインストール/],
   ["japanese install section", "ja/index.html", /Chrome Web Storeで公開予定です/],
-  ["japanese actual popup preview", "ja/index.html", /実際のポップアップ画面/],
-  ["japanese popup memory preview", "ja/index.html", /メモリ目安/],
-  ["japanese popup trial preview", "ja/index.html", /14日間無料です/],
+  ["japanese actual popup screenshot label", "ja/index.html", /実際のポップアップ画面/],
+  ["japanese actual popup screenshot asset", "ja/index.html", /\.\.\/assets\/popup-preview-ja\.png/],
   ["japanese pricing", "ja/index.html", /14日間無料トライアル/],
   ["japanese monthly label", "ja/index.html", /月額/],
   ["japanese yearly label", "ja/index.html", /年額/],
@@ -89,6 +89,9 @@ for (const file of ["index.html", "ja/index.html"]) {
   const content = await readFile(path.join(root, file), "utf8");
   if (/<button[^>]+class="mock-action"/.test(content)) {
     failures.push(`Mock preview action must not be a real button in ${file}`);
+  }
+  if (/mock-app-hero|mock-stat-grid|mock-memory-card|mock-subscription-card|mock-action-stack/.test(content)) {
+    failures.push(`Landing preview must use real screenshot assets, not HTML mock controls, in ${file}`);
   }
 }
 
