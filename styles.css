@@ -369,14 +369,12 @@ button:focus-visible {
   width: 52px;
 }
 
-.preview-mark span,
-.preview-mark::before,
-.preview-mark::after {
+.preview-mark-line {
   background: #fff;
   border-radius: 999px;
-  content: "";
   display: block;
   height: 7px;
+  margin: 0;
   width: 30px;
 }
 

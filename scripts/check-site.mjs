@@ -28,6 +28,8 @@ const checks = [
   ["english install section", "index.html", /Chrome Web Store listing coming soon/],
   ["english popup preview label", "index.html", /Popup preview/],
   ["english popup preview real copy", "index.html", /Lighten all windows/],
+  ["english benefit-led relief label", "index.html", /Chrome relief at a glance/],
+  ["english scoped preview icon", "index.html", /preview-mark-line/],
   ["privacy link", "index.html", /privacy\.html/],
   ["terms link", "index.html", /terms\.html/],
   ["english language switch", "index.html", /data-language-choice="ja"/],
@@ -40,6 +42,8 @@ const checks = [
   ["japanese install section", "ja/index.html", /Chrome Web Storeで公開予定です/],
   ["japanese popup preview label", "ja/index.html", /ポップアッププレビュー/],
   ["japanese popup preview real copy", "ja/index.html", /Chrome全体を軽くする/],
+  ["japanese benefit-led relief label", "ja/index.html", /軽さの変化が見える/],
+  ["japanese scoped preview icon", "ja/index.html", /preview-mark-line/],
   ["japanese pricing", "ja/index.html", /14日間無料トライアル/],
   ["japanese monthly label", "ja/index.html", /月額/],
   ["japanese yearly label", "ja/index.html", /年額/],
@@ -93,6 +97,9 @@ for (const file of ["index.html", "ja/index.html"]) {
   }
   if (/preview-button/.test(content)) {
     failures.push(`Landing preview controls must not look like clickable buttons in ${file}`);
+  }
+  if (/Memory estimate|メモリ目安/.test(content)) {
+    failures.push(`Landing preview uses a weak feature label instead of benefit language in ${file}`);
   }
 }
 
