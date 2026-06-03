@@ -79,6 +79,13 @@ for (const file of ["index.html", "privacy.html", "terms.html", "ja/index.html",
   }
 }
 
+for (const file of ["index.html", "ja/index.html"]) {
+  const content = await readFile(path.join(root, file), "utf8");
+  if (/<button[^>]+class="mock-action"/.test(content)) {
+    failures.push(`Mock preview action must not be a real button in ${file}`);
+  }
+}
+
 const japaneseHome = await readFile(path.join(root, "ja/index.html"), "utf8");
 for (const forbidden of [
   "課金前に、できることと限界を明確に。",
