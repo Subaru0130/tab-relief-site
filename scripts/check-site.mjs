@@ -28,9 +28,11 @@ const checks = [
   ["english install section", "index.html", /Chrome Web Store listing coming soon/],
   ["english popup preview label", "index.html", /Popup preview/],
   ["english popup preview real copy", "index.html", /Lighten all windows/],
-  ["english benefit-led relief label", "index.html", /Chrome relief at a glance/],
+  ["english benefit-led relief label", "index.html", /Demo after sleeping 5 tabs/],
+  ["english preview sleeping count", "index.html", /<span>Sleeping<\/span>\s*<strong>5<\/strong>/],
+  ["english preview estimate basis", "index.html", /50 MB-per-sleeping-tab estimate/],
   ["english useful preview value", "index.html", /250 MB/],
-  ["english demo value explanation", "index.html", /Demo values/],
+  ["english demo value explanation", "index.html", /Demo state/],
   ["english scoped preview icon", "index.html", /preview-mark-line/],
   ["privacy link", "index.html", /privacy\.html/],
   ["terms link", "index.html", /terms\.html/],
@@ -44,9 +46,11 @@ const checks = [
   ["japanese install section", "ja/index.html", /Chrome Web Storeで公開予定です/],
   ["japanese popup preview label", "ja/index.html", /ポップアッププレビュー/],
   ["japanese popup preview real copy", "ja/index.html", /Chrome全体を軽くする/],
-  ["japanese benefit-led relief label", "ja/index.html", /軽さの変化が見える/],
-  ["japanese useful preview value", "ja/index.html", /1\.4 GB/],
-  ["japanese demo value explanation", "ja/index.html", /デモ値/],
+  ["japanese benefit-led relief label", "ja/index.html", /5件休止したときの見え方/],
+  ["japanese preview sleeping count", "ja/index.html", /<span>休止中<\/span>\s*<strong>5<\/strong>/],
+  ["japanese preview estimate basis", "ja/index.html", /休止中のタブ1件あたり50MB/],
+  ["japanese useful preview value", "ja/index.html", /250 MB/],
+  ["japanese demo value explanation", "ja/index.html", /デモ状態/],
   ["japanese scoped preview icon", "ja/index.html", /preview-mark-line/],
   ["japanese pricing", "ja/index.html", /14日間無料トライアル/],
   ["japanese monthly label", "ja/index.html", /月額/],
@@ -107,6 +111,12 @@ for (const file of ["index.html", "ja/index.html"]) {
   }
   if (/Lightened now<\/small>\s*<strong>0 MB|今軽くできた目安<\/small>\s*<strong>0 MB/.test(content)) {
     failures.push(`Landing preview shows a value-killing zero metric in ${file}`);
+  }
+  if (/<span>Sleeping<\/span>\s*<strong>0<\/strong>|<span>休止中<\/span>\s*<strong>0<\/strong>/.test(content)) {
+    failures.push(`Landing preview shows sleeping tabs as zero while presenting relief proof in ${file}`);
+  }
+  if (/Total lightened|累計で軽くした目安|1\.4 GB/.test(content)) {
+    failures.push(`Landing preview uses ungrounded lifetime proof instead of a scenario-based demo in ${file}`);
   }
 }
 
