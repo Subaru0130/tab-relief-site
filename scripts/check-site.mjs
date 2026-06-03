@@ -33,6 +33,8 @@ const checks = [
   ["language preference", "language.js", /tabReliefPreferredLanguage/],
   ["japanese home title", "ja/index.html", /Chromeを軽く/],
   ["japanese pricing", "ja/index.html", /14日間無料トライアル/],
+  ["japanese reviewer access CTA", "ja/index.html", /審査・テスト用アクセスを依頼/],
+  ["japanese support CTA", "ja/index.html", /サポートに問い合わせる/],
   ["japanese language switch", "ja/index.html", /data-language-choice="en"/],
   ["japanese privacy", "ja/privacy.html", /プライバシーポリシー/],
   ["japanese terms", "ja/terms.html", /メモリ削減量の保証はありません/],
