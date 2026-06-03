@@ -256,6 +256,18 @@ button:focus-visible {
   background: var(--primary-strong);
 }
 
+.button.is-disabled {
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.72;
+  transform: none;
+}
+
+.button.is-disabled:hover {
+  background: var(--primary);
+  transform: none;
+}
+
 .button.secondary {
   background: rgba(255, 255, 255, 0.74);
   border-color: var(--line);
@@ -466,6 +478,7 @@ button:focus-visible {
 }
 
 .feature-card,
+.install-card,
 .pricing-card,
 .faq-grid article,
 .cta,
@@ -546,6 +559,48 @@ button:focus-visible {
   width: 28px;
 }
 
+.install-layout {
+  align-items: stretch;
+  display: grid;
+  gap: 32px;
+  grid-template-columns: 1fr 460px;
+}
+
+.install-card {
+  padding: 26px;
+}
+
+.install-status {
+  background: #f8fbff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.install-status span,
+.install-status strong {
+  display: block;
+}
+
+.install-status span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.install-status strong {
+  font-size: 1.4rem;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  margin-top: 8px;
+}
+
+.install-actions {
+  margin-bottom: 14px;
+  margin-top: 18px;
+}
+
 .pricing-layout {
   align-items: stretch;
   display: grid;
@@ -624,6 +679,14 @@ button:focus-visible {
   padding: 34px;
 }
 
+.cta-actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
 .cta h2 {
   font-size: clamp(2rem, 4vw, 3.4rem);
 }
@@ -687,6 +750,7 @@ button:focus-visible {
 @media (max-width: 940px) {
   .hero,
   .two-column,
+  .install-layout,
   .pricing-layout {
     grid-template-columns: 1fr;
   }
@@ -763,6 +827,7 @@ button:focus-visible {
   }
 
   .hero-actions,
+  .cta-actions,
   .cta,
   .footer-grid {
     align-items: stretch;

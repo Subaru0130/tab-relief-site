@@ -24,6 +24,8 @@ const checks = [
   ["pricing yearly", "index.html", /\$10/],
   ["trial", "index.html", /14-day free trial/i],
   ["payment processors", "index.html", /ExtensionPay and Stripe/i],
+  ["english install CTA", "index.html", /Install from Chrome Web Store/],
+  ["english install section", "index.html", /Chrome Web Store listing coming soon/],
   ["privacy link", "index.html", /privacy\.html/],
   ["terms link", "index.html", /terms\.html/],
   ["english language switch", "index.html", /data-language-choice="ja"/],
@@ -32,9 +34,16 @@ const checks = [
   ["language detector", "language.js", /navigator\.languages/],
   ["language preference", "language.js", /tabReliefPreferredLanguage/],
   ["japanese home title", "ja/index.html", /Chromeを軽く/],
+  ["japanese install CTA", "ja/index.html", /Chrome Web Storeでインストール/],
+  ["japanese install section", "ja/index.html", /Chrome Web Storeで公開予定です/],
   ["japanese pricing", "ja/index.html", /14日間無料トライアル/],
+  ["japanese monthly label", "ja/index.html", /月額/],
+  ["japanese yearly label", "ja/index.html", /年額/],
+  ["japanese monthly unit", "ja/index.html", /\/ 月/],
+  ["japanese yearly unit", "ja/index.html", /\/ 年/],
   ["japanese reviewer access CTA", "ja/index.html", /審査・テスト用アクセスを依頼/],
-  ["japanese support CTA", "ja/index.html", /サポートに問い合わせる/],
+  ["japanese support CTA", "ja/index.html", /サポートに連絡/],
+  ["japanese natural FAQ heading", "ja/index.html", /申し込む前に、不安を残さない。/],
   ["japanese language switch", "ja/index.html", /data-language-choice="en"/],
   ["japanese privacy", "ja/privacy.html", /プライバシーポリシー/],
   ["japanese terms", "ja/terms.html", /メモリ削減量の保証はありません/],
@@ -67,6 +76,19 @@ for (const file of ["index.html", "privacy.html", "terms.html", "ja/index.html",
   const content = await readFile(path.join(root, file), "utf8");
   if (/笨|�/.test(content)) {
     failures.push(`Encoding artifact found in ${file}`);
+  }
+}
+
+const japaneseHome = await readFile(path.join(root, "ja/index.html"), "utf8");
+for (const forbidden of [
+  "課金前に、できることと限界を明確に。",
+  "Monthly",
+  "Yearly",
+  "/ month",
+  "/ year"
+]) {
+  if (japaneseHome.includes(forbidden)) {
+    failures.push(`Unnatural or untranslated Japanese home copy found: ${forbidden}`);
   }
 }
 
