@@ -1,0 +1,6 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tab Relief logo">
+  <rect width="128" height="128" rx="32" fill="#1F6FEB"/>
+  <path d="M36 38C36 34.6863 38.6863 32 42 32H86C89.3137 32 92 34.6863 92 38V46C92 49.3137 89.3137 52 86 52H42C38.6863 52 36 49.3137 36 46V38Z" fill="white"/>
+  <path d="M28 62C28 58.6863 30.6863 56 34 56H94C97.3137 56 100 58.6863 100 62V70C100 73.3137 97.3137 76 94 76H34C30.6863 76 28 73.3137 28 70V62Z" fill="white" fill-opacity="0.92"/>
+  <path d="M42 86C42 82.6863 44.6863 80 48 80H80C83.3137 80 86 82.6863 86 86V94C86 97.3137 83.3137 100 80 100H48C44.6863 100 42 97.3137 42 94V86Z" fill="white" fill-opacity="0.84"/>
+</svg>

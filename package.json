@@ -1,0 +1,11 @@
+{
+  "name": "tab-relief-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Public GitHub Pages landing page for Tab Relief.",
+  "scripts": {
+    "capture": "node scripts/capture-preview.mjs",
+    "check": "node scripts/check-site.mjs",
+    "serve": "node scripts/serve.mjs"
+  }
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://subaru0130.github.io/tab-relief-site/sitemap.xml
