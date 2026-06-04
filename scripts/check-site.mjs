@@ -26,14 +26,13 @@ const checks = [
   ["payment processors", "index.html", /ExtensionPay and Stripe/i],
   ["english install CTA", "index.html", /Install from Chrome Web Store/],
   ["english install section", "index.html", /Chrome Web Store listing coming soon/],
-  ["english outcome card label", "index.html", /What one cleanup can do/],
-  ["english outcome disclaimer", "index.html", /Outcome example, not a screenshot/],
-  ["english outcome promise", "index.html", /42 tabs stay open\. 16 inactive tabs sleep/],
-  ["english action safety copy", "index.html", /Active, pinned, and audio tabs stay awake/],
-  ["english outcome kept count", "index.html", /<span>Tabs kept open<\/span>\s*<strong>42<\/strong>/],
-  ["english outcome slept count", "index.html", /<span>Tabs put to sleep<\/span>\s*<strong>16<\/strong>/],
-  ["english useful preview value", "index.html", /800 MB/],
-  ["english outcome copy", "index.html", /without forcing you to close the tabs you still need/],
+  ["english popup top label", "index.html", /Popup top preview/],
+  ["english popup brand", "index.html", /Tab memory control/],
+  ["english popup total count", "index.html", /<span>Total tabs<\/span>\s*<strong>42<\/strong>/],
+  ["english popup ready count", "index.html", /<span>Ready<\/span>\s*<strong>19<\/strong>/],
+  ["english popup sleeping count", "index.html", /<span>Sleeping<\/span>\s*<strong>16<\/strong>/],
+  ["english popup action", "index.html", /Sleep inactive tabs/],
+  ["english popup safety copy", "index.html", /Active, pinned, and audio tabs stay awake/],
   ["privacy link", "index.html", /privacy\.html/],
   ["terms link", "index.html", /terms\.html/],
   ["english language switch", "index.html", /data-language-choice="ja"/],
@@ -44,14 +43,13 @@ const checks = [
   ["japanese home title", "ja/index.html", /Chromeを軽く/],
   ["japanese install CTA", "ja/index.html", /Chrome Web Storeでインストール/],
   ["japanese install section", "ja/index.html", /Chrome Web Storeで公開予定です/],
-  ["japanese outcome card label", "ja/index.html", /1回の整理で起きること/],
-  ["japanese outcome disclaimer", "ja/index.html", /実画面ではなく、結果のイメージです/],
-  ["japanese outcome promise", "ja/index.html", /42タブは残す。使っていない16件だけ休止。/],
-  ["japanese action safety copy", "ja/index.html", /作業中・固定・音声再生中のタブは守ります/],
-  ["japanese outcome kept count", "ja/index.html", /<span>残すタブ<\/span>\s*<strong>42<\/strong>/],
-  ["japanese outcome slept count", "ja/index.html", /<span>休止するタブ<\/span>\s*<strong>16<\/strong>/],
-  ["japanese useful preview value", "ja/index.html", /800 MB/],
-  ["japanese outcome copy", "ja/index.html", /必要なタブを閉じずに残したまま/],
+  ["japanese popup top label", "ja/index.html", /ポップアップ上部プレビュー/],
+  ["japanese popup brand", "ja/index.html", /タブのメモリ整理/],
+  ["japanese popup total count", "ja/index.html", /<span>総タブ数<\/span>\s*<strong>42<\/strong>/],
+  ["japanese popup ready count", "ja/index.html", /<span>休止可能<\/span>\s*<strong>19<\/strong>/],
+  ["japanese popup sleeping count", "ja/index.html", /<span>休止中<\/span>\s*<strong>16<\/strong>/],
+  ["japanese popup action", "ja/index.html", /使っていないタブを休止/],
+  ["japanese popup safety copy", "ja/index.html", /作業中・固定・音声再生中のタブは守る/],
   ["japanese pricing", "ja/index.html", /14日間無料トライアル/],
   ["japanese monthly label", "ja/index.html", /月額/],
   ["japanese yearly label", "ja/index.html", /年額/],
@@ -100,8 +98,14 @@ for (const file of ["index.html", "ja/index.html"]) {
   if (/<button[^>]+class="mock-action"/.test(content)) {
     failures.push(`Mock preview action must not be a real button in ${file}`);
   }
-  if (/popup-preview-(en|ja)\.png|mock-top|Actual popup screenshot|実際のポップアップ画面|Popup preview|ポップアッププレビュー|popup-preview-card|preview-hero|preview-main-action/.test(content)) {
-    failures.push(`Landing hero must not pretend the outcome card is the actual popup UI in ${file}`);
+  if (/popup-preview-(en|ja)\.png|mock-top|Actual popup screenshot|実際のポップアップ画面|Popup preview|ポップアッププレビュー|preview-main-action/.test(content)) {
+    failures.push(`Landing hero must not use a bitmap screenshot or the older generic popup mock in ${file}`);
+  }
+  if (/outcome-card|What one cleanup can do|1回の整理で起きること|Outcome example, not a screenshot|実画面ではなく、結果のイメージです/.test(content)) {
+    failures.push(`Landing hero should use the scoped popup-top HTML preview, not the prior outcome-card variant in ${file}`);
+  }
+  if (/workflow-card|workflow-steps|How it works|3ステップで整理|Keep your tabs\. Sleep the background load|タブは残す。裏の負荷だけ休ませる。/.test(content)) {
+    failures.push(`Landing hero should use the popup-top HTML preview, not the workflow diagram variant in ${file}`);
   }
   if (/preview-button/.test(content)) {
     failures.push(`Landing preview controls must not look like clickable buttons in ${file}`);
