@@ -423,6 +423,10 @@ button:focus-visible {
   grid-template-columns: 1fr 1fr;
 }
 
+.preview-metric-grid.is-single {
+  grid-template-columns: 1fr;
+}
+
 .preview-panel p {
   margin: 8px 0 0;
 }

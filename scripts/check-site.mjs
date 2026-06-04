@@ -29,12 +29,12 @@ const checks = [
   ["english popup preview label", "index.html", /Popup preview/],
   ["english popup preview real copy", "index.html", /Sleep inactive tabs/],
   ["english action safety copy", "index.html", /Keeps active, pinned, and audio tabs awake/],
-  ["english benefit-led relief label", "index.html", /16 inactive tabs asleep/],
+  ["english benefit-led relief label", "index.html", /Estimated relief/],
   ["english preview total count", "index.html", /<span>Total tabs<\/span>\s*<strong>42<\/strong>/],
   ["english preview sleeping count", "index.html", /<span>Sleeping<\/span>\s*<strong>16<\/strong>/],
-  ["english preview estimate basis", "index.html", /50 MB per sleeping tab/],
+  ["english preview estimate basis", "index.html", /Based on 16 inactive tabs at 50 MB each/],
   ["english useful preview value", "index.html", /800 MB/],
-  ["english demo value explanation", "index.html", /Estimate uses 50 MB per sleeping tab/],
+  ["english demo value explanation", "index.html", /Keep tabs open, reduce load/],
   ["english scoped preview icon", "index.html", /preview-mark-line/],
   ["privacy link", "index.html", /privacy\.html/],
   ["terms link", "index.html", /terms\.html/],
@@ -49,12 +49,12 @@ const checks = [
   ["japanese popup preview label", "ja/index.html", /ポップアッププレビュー/],
   ["japanese popup preview real copy", "ja/index.html", /使っていないタブを休止/],
   ["japanese action safety copy", "ja/index.html", /作業中・固定・音声再生中のタブは守る/],
-  ["japanese benefit-led relief label", "ja/index.html", /使っていないタブ16件を休止中/],
+  ["japanese benefit-led relief label", "ja/index.html", /軽くなった目安/],
   ["japanese preview total count", "ja/index.html", /<span>総タブ数<\/span>\s*<strong>42<\/strong>/],
   ["japanese preview sleeping count", "ja/index.html", /<span>休止中<\/span>\s*<strong>16<\/strong>/],
-  ["japanese preview estimate basis", "ja/index.html", /1件50MB/],
+  ["japanese preview estimate basis", "ja/index.html", /使っていない16件をもとに、1件50MB/],
   ["japanese useful preview value", "ja/index.html", /800 MB/],
-  ["japanese demo value explanation", "ja/index.html", /目安は1件50MBで計算しています/],
+  ["japanese demo value explanation", "ja/index.html", /タブは残したまま、負荷を下げる/],
   ["japanese scoped preview icon", "ja/index.html", /preview-mark-line/],
   ["japanese pricing", "ja/index.html", /14日間無料トライアル/],
   ["japanese monthly label", "ja/index.html", /月額/],
@@ -124,6 +124,9 @@ for (const file of ["index.html", "ja/index.html"]) {
   }
   if (/タブが多い人のデモ例|迷わず押せる整理操作|今見ていない安全なタブだけ|Heavy-tab demo|One calm cleanup action|Safe tabs you are not viewing/.test(content)) {
     failures.push(`Landing preview exposes design-intent copy instead of direct state/action copy in ${file}`);
+  }
+  if (/使っていないタブ16件を休止中|16 inactive tabs asleep|休止中のタブ|Sleeping tabs/.test(content)) {
+    failures.push(`Landing preview repeats sleeping state instead of separating state from outcome in ${file}`);
   }
 }
 
