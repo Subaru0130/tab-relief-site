@@ -26,16 +26,14 @@ const checks = [
   ["payment processors", "index.html", /ExtensionPay and Stripe/i],
   ["english install CTA", "index.html", /Install from Chrome Web Store/],
   ["english install section", "index.html", /Chrome Web Store listing coming soon/],
-  ["english popup preview label", "index.html", /Popup preview/],
-  ["english popup preview real copy", "index.html", /Sleep inactive tabs/],
-  ["english action safety copy", "index.html", /Keeps active, pinned, and audio tabs awake/],
-  ["english benefit-led relief label", "index.html", /Estimated relief/],
-  ["english preview total count", "index.html", /<span>Total tabs<\/span>\s*<strong>42<\/strong>/],
-  ["english preview sleeping count", "index.html", /<span>Sleeping<\/span>\s*<strong>16<\/strong>/],
-  ["english preview estimate basis", "index.html", /Based on 16 inactive tabs at 50 MB each/],
+  ["english outcome card label", "index.html", /What one cleanup can do/],
+  ["english outcome disclaimer", "index.html", /Outcome example, not a screenshot/],
+  ["english outcome promise", "index.html", /42 tabs stay open\. 16 inactive tabs sleep/],
+  ["english action safety copy", "index.html", /Active, pinned, and audio tabs stay awake/],
+  ["english outcome kept count", "index.html", /<span>Tabs kept open<\/span>\s*<strong>42<\/strong>/],
+  ["english outcome slept count", "index.html", /<span>Tabs put to sleep<\/span>\s*<strong>16<\/strong>/],
   ["english useful preview value", "index.html", /800 MB/],
-  ["english demo value explanation", "index.html", /Keep tabs open, reduce load/],
-  ["english scoped preview icon", "index.html", /preview-mark-line/],
+  ["english outcome copy", "index.html", /without forcing you to close the tabs you still need/],
   ["privacy link", "index.html", /privacy\.html/],
   ["terms link", "index.html", /terms\.html/],
   ["english language switch", "index.html", /data-language-choice="ja"/],
@@ -46,16 +44,14 @@ const checks = [
   ["japanese home title", "ja/index.html", /Chromeを軽く/],
   ["japanese install CTA", "ja/index.html", /Chrome Web Storeでインストール/],
   ["japanese install section", "ja/index.html", /Chrome Web Storeで公開予定です/],
-  ["japanese popup preview label", "ja/index.html", /ポップアッププレビュー/],
-  ["japanese popup preview real copy", "ja/index.html", /使っていないタブを休止/],
-  ["japanese action safety copy", "ja/index.html", /作業中・固定・音声再生中のタブは守る/],
-  ["japanese benefit-led relief label", "ja/index.html", /軽くなった目安/],
-  ["japanese preview total count", "ja/index.html", /<span>総タブ数<\/span>\s*<strong>42<\/strong>/],
-  ["japanese preview sleeping count", "ja/index.html", /<span>休止中<\/span>\s*<strong>16<\/strong>/],
-  ["japanese preview estimate basis", "ja/index.html", /使っていない16件をもとに、1件50MB/],
+  ["japanese outcome card label", "ja/index.html", /1回の整理で起きること/],
+  ["japanese outcome disclaimer", "ja/index.html", /実画面ではなく、結果のイメージです/],
+  ["japanese outcome promise", "ja/index.html", /42タブは残す。使っていない16件だけ休止。/],
+  ["japanese action safety copy", "ja/index.html", /作業中・固定・音声再生中のタブは守ります/],
+  ["japanese outcome kept count", "ja/index.html", /<span>残すタブ<\/span>\s*<strong>42<\/strong>/],
+  ["japanese outcome slept count", "ja/index.html", /<span>休止するタブ<\/span>\s*<strong>16<\/strong>/],
   ["japanese useful preview value", "ja/index.html", /800 MB/],
-  ["japanese demo value explanation", "ja/index.html", /タブは残したまま、負荷を下げる/],
-  ["japanese scoped preview icon", "ja/index.html", /preview-mark-line/],
+  ["japanese outcome copy", "ja/index.html", /必要なタブを閉じずに残したまま/],
   ["japanese pricing", "ja/index.html", /14日間無料トライアル/],
   ["japanese monthly label", "ja/index.html", /月額/],
   ["japanese yearly label", "ja/index.html", /年額/],
@@ -104,8 +100,8 @@ for (const file of ["index.html", "ja/index.html"]) {
   if (/<button[^>]+class="mock-action"/.test(content)) {
     failures.push(`Mock preview action must not be a real button in ${file}`);
   }
-  if (/popup-preview-(en|ja)\.png|mock-top|Actual popup screenshot|実際のポップアップ画面/.test(content)) {
-    failures.push(`Landing preview must not use raw screenshots or fake window controls in ${file}`);
+  if (/popup-preview-(en|ja)\.png|mock-top|Actual popup screenshot|実際のポップアップ画面|Popup preview|ポップアッププレビュー|popup-preview-card|preview-hero|preview-main-action/.test(content)) {
+    failures.push(`Landing hero must not pretend the outcome card is the actual popup UI in ${file}`);
   }
   if (/preview-button/.test(content)) {
     failures.push(`Landing preview controls must not look like clickable buttons in ${file}`);
