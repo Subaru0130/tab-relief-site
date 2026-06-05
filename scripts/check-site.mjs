@@ -31,8 +31,9 @@ const checks = [
   ["english popup total count", "index.html", /<span>Total tabs<\/span>\s*<strong>42<\/strong>/],
   ["english popup ready count", "index.html", /<span>Ready<\/span>\s*<strong>19<\/strong>/],
   ["english popup sleeping count", "index.html", /<span>Sleeping<\/span>\s*<strong>16<\/strong>/],
-  ["english popup action", "index.html", /Sleep inactive tabs/],
-  ["english popup safety copy", "index.html", /Active, pinned, and audio tabs stay awake/],
+  ["english popup current relief", "index.html", /Current relief estimate/],
+  ["english popup useful estimate", "index.html", /<strong>800 MB<\/strong>/],
+  ["english popup estimate formula", "index.html", /16 sleeping tabs × 50 MB/],
   ["privacy link", "index.html", /privacy\.html/],
   ["terms link", "index.html", /terms\.html/],
   ["english language switch", "index.html", /data-language-choice="ja"/],
@@ -48,8 +49,9 @@ const checks = [
   ["japanese popup total count", "ja/index.html", /<span>総タブ数<\/span>\s*<strong>42<\/strong>/],
   ["japanese popup ready count", "ja/index.html", /<span>休止可能<\/span>\s*<strong>19<\/strong>/],
   ["japanese popup sleeping count", "ja/index.html", /<span>休止中<\/span>\s*<strong>16<\/strong>/],
-  ["japanese popup action", "ja/index.html", /使っていないタブを休止/],
-  ["japanese popup safety copy", "ja/index.html", /作業中・固定・音声再生中のタブは守る/],
+  ["japanese popup current relief", "ja/index.html", /現在の軽量化目安/],
+  ["japanese popup useful estimate", "ja/index.html", /<strong>800 MB<\/strong>/],
+  ["japanese popup estimate formula", "ja/index.html", /休止中16件 × 50MB/],
   ["japanese pricing", "ja/index.html", /14日間無料トライアル/],
   ["japanese monthly label", "ja/index.html", /月額/],
   ["japanese yearly label", "ja/index.html", /年額/],
@@ -98,7 +100,7 @@ for (const file of ["index.html", "ja/index.html"]) {
   if (/<button[^>]+class="mock-action"/.test(content)) {
     failures.push(`Mock preview action must not be a real button in ${file}`);
   }
-  if (/popup-preview-(en|ja)\.png|mock-top|Actual popup screenshot|実際のポップアップ画面|Popup preview|ポップアッププレビュー|preview-main-action/.test(content)) {
+  if (/popup-preview-(en|ja)\.png|mock-top|Actual popup screenshot|実際のポップアップ画面|Popup preview|ポップアッププレビュー|preview-main-action|preview-primary-action/.test(content)) {
     failures.push(`Landing hero must not use a bitmap screenshot or the older generic popup mock in ${file}`);
   }
   if (/outcome-card|What one cleanup can do|1回の整理で起きること|Outcome example, not a screenshot|実画面ではなく、結果のイメージです/.test(content)) {
@@ -124,6 +126,9 @@ for (const file of ["index.html", "ja/index.html"]) {
   }
   if (/タブが多い人のデモ例|迷わず押せる整理操作|今見ていない安全なタブだけ|Heavy-tab demo|One calm cleanup action|Safe tabs you are not viewing/.test(content)) {
     failures.push(`Landing preview exposes design-intent copy instead of direct state/action copy in ${file}`);
+  }
+  if (/One-click cleanup|ワンクリック整理/.test(content)) {
+    failures.push(`Landing hero should use quantitative proof instead of action explanation in ${file}`);
   }
   if (/使っていないタブ16件を休止中|16 inactive tabs asleep|休止中のタブ|Sleeping tabs/.test(content)) {
     failures.push(`Landing preview repeats sleeping state instead of separating state from outcome in ${file}`);

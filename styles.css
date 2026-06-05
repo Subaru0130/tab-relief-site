@@ -322,7 +322,7 @@ button:focus-visible {
 }
 
 .preview-hero span,
-.preview-primary-action span {
+.preview-memory-card span {
   color: var(--primary-strong);
   display: block;
   font-size: 0.74rem;
@@ -340,7 +340,7 @@ button:focus-visible {
 }
 
 .preview-hero small,
-.preview-primary-action small {
+.preview-memory-row small {
   color: var(--muted);
   display: block;
   font-size: 0.78rem;
@@ -405,7 +405,7 @@ button:focus-visible {
   margin-top: 6px;
 }
 
-.preview-primary-action {
+.preview-memory-card {
   background: #f8fbff;
   border: 1px solid rgba(31, 111, 235, 0.18);
   border-left: 4px solid rgba(31, 111, 235, 0.48);
@@ -414,11 +414,25 @@ button:focus-visible {
   padding: 13px 14px;
 }
 
-.preview-primary-action strong {
+.preview-memory-row {
+  align-items: end;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.preview-memory-row strong {
   display: block;
-  font-size: 0.98rem;
-  letter-spacing: -0.03em;
+  font-size: 1.7rem;
+  letter-spacing: -0.055em;
+  line-height: 1;
   margin-top: 4px;
+  white-space: nowrap;
+}
+
+.preview-memory-row small {
+  margin-left: auto;
+  text-align: right;
 }
 
 .dot {
