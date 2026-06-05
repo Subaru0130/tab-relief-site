@@ -29,11 +29,10 @@ const checks = [
   ["english popup top label", "index.html", /Popup top preview/],
   ["english popup brand", "index.html", /Tab memory control/],
   ["english popup total count", "index.html", /<span>Total tabs<\/span>\s*<strong>42<\/strong>/],
-  ["english popup ready count", "index.html", /<span>Ready<\/span>\s*<strong>19<\/strong>/],
+  ["english popup ready count", "index.html", /<span>Ready<\/span>\s*<strong>8<\/strong>/],
   ["english popup sleeping count", "index.html", /<span>Sleeping<\/span>\s*<strong>16<\/strong>/],
   ["english popup current relief", "index.html", /Current relief estimate/],
   ["english popup useful estimate", "index.html", /<strong>800 MB<\/strong>/],
-  ["english popup estimate formula", "index.html", /16 sleeping tabs × 50 MB/],
   ["privacy link", "index.html", /privacy\.html/],
   ["terms link", "index.html", /terms\.html/],
   ["english language switch", "index.html", /data-language-choice="ja"/],
@@ -47,11 +46,10 @@ const checks = [
   ["japanese popup top label", "ja/index.html", /ポップアップ上部プレビュー/],
   ["japanese popup brand", "ja/index.html", /タブのメモリ整理/],
   ["japanese popup total count", "ja/index.html", /<span>総タブ数<\/span>\s*<strong>42<\/strong>/],
-  ["japanese popup ready count", "ja/index.html", /<span>休止可能<\/span>\s*<strong>19<\/strong>/],
+  ["japanese popup ready count", "ja/index.html", /<span>休止可能<\/span>\s*<strong>8<\/strong>/],
   ["japanese popup sleeping count", "ja/index.html", /<span>休止中<\/span>\s*<strong>16<\/strong>/],
   ["japanese popup current relief", "ja/index.html", /現在の軽量化目安/],
   ["japanese popup useful estimate", "ja/index.html", /<strong>800 MB<\/strong>/],
-  ["japanese popup estimate formula", "ja/index.html", /休止中16件 × 50MB/],
   ["japanese pricing", "ja/index.html", /14日間無料トライアル/],
   ["japanese monthly label", "ja/index.html", /月額/],
   ["japanese yearly label", "ja/index.html", /年額/],
@@ -129,6 +127,9 @@ for (const file of ["index.html", "ja/index.html"]) {
   }
   if (/One-click cleanup|ワンクリック整理/.test(content)) {
     failures.push(`Landing hero should use quantitative proof instead of action explanation in ${file}`);
+  }
+  if (/16 sleeping tabs × 50 MB|休止中16件 × 50MB/.test(content)) {
+    failures.push(`Landing hero should not expose the memory-estimate formula in ${file}`);
   }
   if (/使っていないタブ16件を休止中|16 inactive tabs asleep|休止中のタブ|Sleeping tabs/.test(content)) {
     failures.push(`Landing preview repeats sleeping state instead of separating state from outcome in ${file}`);

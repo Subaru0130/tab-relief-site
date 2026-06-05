@@ -339,8 +339,7 @@ button:focus-visible {
   line-height: 1.04;
 }
 
-.preview-hero small,
-.preview-memory-row small {
+.preview-hero small {
   color: var(--muted);
   display: block;
   font-size: 0.78rem;
@@ -415,10 +414,7 @@ button:focus-visible {
 }
 
 .preview-memory-row {
-  align-items: end;
-  display: flex;
-  gap: 12px;
-  justify-content: space-between;
+  display: block;
 }
 
 .preview-memory-row strong {
@@ -428,11 +424,6 @@ button:focus-visible {
   line-height: 1;
   margin-top: 4px;
   white-space: nowrap;
-}
-
-.preview-memory-row small {
-  margin-left: auto;
-  text-align: right;
 }
 
 .dot {
