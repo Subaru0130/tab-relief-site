@@ -5,257 +5,304 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Tab Reliefは、使っていないChromeタブを休止し、重要なサイトを保護し、ワークスペースを保存して、ブラウザのタブ整理を助けるChrome拡張機能です。"
+      content="Tab Reliefは、使っていないタブの休止、ワークスペース保存、重要サイトの保護、条件に合うタブの整理で、作業場所を失わずにChromeを軽く保つための拡張機能です。"
     >
     <meta name="theme-color" content="#1f6feb">
-    <title>Tab Relief | Chromeを軽く、作業はそのまま</title>
+    <title>Tab Relief | タブは残す。Chromeは軽く。</title>
     <link rel="canonical" href="https://subaru0130.github.io/tab-relief-site/ja/">
     <link rel="alternate" hreflang="en" href="https://subaru0130.github.io/tab-relief-site/">
     <link rel="alternate" hreflang="ja" href="https://subaru0130.github.io/tab-relief-site/ja/">
     <link rel="alternate" hreflang="x-default" href="https://subaru0130.github.io/tab-relief-site/">
     <link rel="icon" href="../assets/mark.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../landing.css">
     <script src="../language.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">本文へ移動</a>
 
     <header class="site-header" aria-label="メインナビゲーション">
-      <nav class="nav shell">
+      <nav class="shell nav">
         <a class="brand" href="index.html?lang=ja" aria-label="Tab Relief ホーム">
-          <img class="brand-mark" src="../assets/mark.svg" alt="" width="36" height="36">
+          <img src="../assets/mark.svg" alt="" width="36" height="36">
           <span>Tab Relief</span>
         </a>
-        <div class="nav-links" aria-label="主要リンク">
-          <a href="#install">インストール</a>
-          <a href="#features">機能</a>
-          <a href="#pricing">料金</a>
-          <a href="#faq">FAQ</a>
-          <a href="privacy.html">プライバシー</a>
-        </div>
         <div class="language-switch" aria-label="言語">
-          <a data-language-choice="en" href="../?lang=en">English</a>
-          <a class="is-current" data-language-choice="ja" href="index.html?lang=ja">日本語</a>
+          <a data-language-choice="en" href="../index.html?lang=en">English</a>
+          <a class="is-current" data-language-choice="ja" href="index.html?lang=ja" lang="ja">日本語</a>
         </div>
       </nav>
     </header>
 
     <main id="main">
-      <section class="hero shell">
-        <div class="hero-copy">
-          <p class="eyebrow">Chromeタブのメモリ整理</p>
-          <h1 class="ja-hero-title">
-            <span>Chromeを軽く。</span>
-            <span>作業はそのまま。</span>
-          </h1>
-          <p class="hero-lede">
-            Tab Reliefは、使っていないタブを休止し、重要なサイトを保護し、散らかった作業ウィンドウを保存できるChrome拡張機能です。
-          </p>
-          <div class="hero-actions" aria-label="主な操作">
-            <a class="button primary" href="#install">Chrome Web Storeでインストール</a>
-            <a class="button secondary" href="#pricing">料金を見る</a>
-          </div>
-          <p class="trust-note">
-            Chrome Web Storeで公開準備中です。審査・テスト用アクセスは下のインストール欄から依頼できます。
-          </p>
+      <section class="hero shell" aria-labelledby="hero-title">
+        <p class="eyebrow">Chromeタブのメモリ整理</p>
+        <h1 id="hero-title" class="ja-title">
+          <span>タブは残す。</span>
+          <span>Chromeは軽く。</span>
+        </h1>
+        <p class="lede">
+          Tab Reliefは、使っていないタブを休止し、散らかった作業ウィンドウを保存し、
+          重要なサイトを守りながら、Chromeを軽く保つための拡張機能です。
+        </p>
+        <div class="hero-actions" aria-label="主な操作">
+          <a class="button primary" href="#install">インストール状況を見る</a>
+          <a class="button secondary" href="#features">機能を見る</a>
         </div>
+        <p class="note">公開後は無料でインストールできます。有料操作は14日間の無料トライアルで試せます。</p>
 
-        <aside class="product-card" aria-label="Tab Reliefのポップアップ上部プレビュー">
-          <div class="popup-preview-card">
-            <p class="preview-kicker">ポップアップ上部プレビュー</p>
-            <div class="preview-hero">
-              <div>
-                <span>タブのメモリ整理</span>
-                <strong>Tab Relief</strong>
-                <small>Chromeを軽く保ち、作業スペースも保存する。</small>
+        <div class="product-stage">
+          <aside class="panel popup-panel" aria-label="Tab Reliefのポップアップ画面プレビュー">
+            <div class="popup-preview" aria-label="ポップアップの利用例">
+              <div class="popup-top">
+                <img class="popup-logo" src="../assets/mark.svg" alt="">
+                <div class="popup-title">
+                  <strong>Tab Relief</strong>
+                  <span>軽く保つ</span>
+                </div>
+                <span class="pill">トライアル</span>
               </div>
-              <div class="preview-mark" aria-hidden="true">
-                <span class="preview-mark-line"></span>
-                <span class="preview-mark-line"></span>
-                <span class="preview-mark-line"></span>
+
+              <div class="relief-row">
+                <div class="relief-circle" aria-hidden="true">
+                  <svg viewBox="0 0 44 44">
+                    <path d="M7 24c4 0 4-12 8-12s4 24 8 24 4-24 8-24 4 12 8 12" />
+                  </svg>
+                </div>
+                <div class="relief-copy">
+                  <strong>800 MB</strong>
+                  <b>軽量化目安</b>
+                  <span>休止中 16件 / 休止可能 8件</span>
+                </div>
+              </div>
+
+              <div class="actual-main-action" aria-hidden="true">
+                <svg viewBox="0 0 48 48">
+                  <path d="M31.5 8.5A16.8 16.8 0 1 0 39.4 29 12.5 12.5 0 0 1 24 13.6a16.7 16.7 0 0 0 7.5-5.1Z" />
+                  <path d="M38 8v8" />
+                  <path d="M34 12h8" />
+                </svg>
+                <div>
+                  <strong>未使用タブを休止</strong>
+                  <span>作業中はそのまま</span>
+                </div>
+                <b>&gt;</b>
+              </div>
+
+              <div class="preview-secondary" aria-hidden="true">
+                <svg viewBox="0 0 48 48">
+                  <path d="M10 13h4" />
+                  <path d="M10 24h4" />
+                  <path d="M10 35h4" />
+                  <path d="M22 13h18" />
+                  <path d="M22 24h18" />
+                  <path d="M22 35h18" />
+                </svg>
+                <div>
+                  <strong>タブを確認</strong>
+                  <span>絞り込み、手動選択</span>
+                </div>
+                <b>&gt;</b>
+              </div>
+
+              <div class="preview-list">
+                <div class="preview-row">
+                  <svg class="green" viewBox="0 0 48 48" aria-hidden="true">
+                    <path d="M11 8h22l4 4v28H11z" />
+                    <path d="M17 8v12h16V8" />
+                    <path d="M17 40V27h14v13" />
+                  </svg>
+                  <div><strong>ワークスペースを保存</strong><span>名前を付けて保存</span></div>
+                  <b aria-hidden="true">&gt;</b>
+                </div>
+                <div class="preview-row">
+                  <svg class="amber" viewBox="0 0 48 48" aria-hidden="true">
+                    <path d="M24 6 38 11v11c0 9.2-5.5 16.5-14 20-8.5-3.5-14-10.8-14-20V11z" />
+                  </svg>
+                  <div><strong>このサイトを保護</strong><span>重要なドメインを休止しない</span></div>
+                  <b aria-hidden="true">&gt;</b>
+                </div>
+                <div class="preview-row">
+                  <svg class="blue" viewBox="0 0 48 48" aria-hidden="true">
+                    <circle cx="24" cy="24" r="18" />
+                    <path d="M24 13v12l8 5" />
+                  </svg>
+                  <div><strong>自動スリープ</strong><span>15分未使用で休止</span></div>
+                  <span class="pill quiet">オフ</span>
+                </div>
               </div>
             </div>
+          </aside>
 
-            <div class="preview-stats" aria-label="ポップアップ上部のタブ数例">
-              <article>
-                <span>総タブ数</span>
-                <strong>42</strong>
-              </article>
-              <article>
-                <span>休止可能</span>
-                <strong>8</strong>
-              </article>
-              <article>
-                <span>休止中</span>
-                <strong>16</strong>
-              </article>
-            </div>
-
-            <div class="preview-memory-card" aria-label="ポップアップ上部の軽量化目安例">
-              <span>現在の軽量化目安</span>
-              <div class="preview-memory-row">
-                <strong>800 MB</strong>
+          <aside class="panel control-card" aria-label="Tab Reliefで管理できること">
+            <p class="eyebrow">管理できること</p>
+            <h2>軽くする。でも必要なものは残す。</h2>
+            <div class="proof-list">
+              <div class="proof-row">
+                <span class="proof-icon blue" aria-hidden="true"></span>
+                <div>
+                  <strong>ワークスペースを保存</strong>
+                  <span>あとで戻したい作業ウィンドウを、まとめて残せます。</span>
+                </div>
+              </div>
+              <div class="proof-row">
+                <span class="proof-icon amber" aria-hidden="true"></span>
+                <div>
+                  <strong>重要サイトを保護</strong>
+                  <span>指定したドメインは、自動整理の対象から外せます。</span>
+                </div>
+              </div>
+              <div class="proof-row">
+                <span class="proof-icon red" aria-hidden="true"></span>
+                <div>
+                  <strong>条件に合うタブを閉じる</strong>
+                  <span>タイトル、ドメイン、URLで探して、閉じる前に確認できます。</span>
+                </div>
               </div>
             </div>
-          </div>
-        </aside>
-      </section>
-
-      <section class="value-strip" aria-label="製品概要">
-        <div class="shell value-grid">
-          <div>
-            <strong>使っていないタブを休止</strong>
-            <span>Chrome標準のタブ破棄機能を使い、裏で開きっぱなしのタブ負荷を減らします。</span>
-          </div>
-          <div>
-            <strong>作業ウィンドウを保存</strong>
-            <span>散らかったタブをワークスペースとして保存し、必要なときにまとめて戻せます。</span>
-          </div>
-          <div>
-            <strong>大事なサイトを保護</strong>
-            <span>作業中のタブ、音声、固定タブ、指定ドメインは自動休止の対象外にできます。</span>
-          </div>
+          </aside>
         </div>
       </section>
 
       <section id="features" class="section shell">
         <div class="section-heading">
-          <p class="eyebrow">タブを多く開く人向け</p>
-          <h2>タブの散らかりも、誤操作の不安も減らす。</h2>
+          <p class="eyebrow">できること</p>
+          <h2>毎日増えるタブを、閉じずに整理するための4機能。</h2>
           <p>
-            目的はひとつです。毎日すべてのタブを手で確認しなくても、Chromeを軽く保ちやすくすることです。
+            Tab Reliefの目的はひとつです。毎日すべてのタブを手で確認しなくても、
+            Chromeを扱いやすく保てるようにすることです。
           </p>
         </div>
-
-        <div class="feature-grid">
-          <article class="feature-card">
-            <div class="icon-chip">01</div>
-            <h3>ワンクリックで軽量化</h3>
+        <div class="detail-grid">
+          <article class="detail-card">
+            <span class="number">01</span>
+            <h3>使っていないタブを休止</h3>
             <p>
-              休止してよい安全なタブを自動で選びます。細かく選びたいときだけ、タブ確認画面に進めます。
+              Chrome標準のタブ破棄機能を使い、裏で開きっぱなしのタブを休ませます。
+              必要になったら、開いたタイミングで戻せます。
             </p>
           </article>
-          <article class="feature-card">
-            <div class="icon-chip">02</div>
+          <article class="detail-card">
+            <span class="number">02</span>
             <h3>自動スリープ</h3>
             <p>
-              一定時間使っていない安全な背景タブを、指定した間隔で静かに休止します。
+              指定した時間使っていないタブを静かに休止します。初期値は分かりやすい
+              15分にしています。
             </p>
           </article>
-          <article class="feature-card">
-            <div class="icon-chip">03</div>
-            <h3>ワークスペース保存</h3>
+          <article class="detail-card">
+            <span class="number">03</span>
+            <h3>ワークスペース復元</h3>
             <p>
-              今のウィンドウを名前付きで保存し、あとで必要になったときにまとめて復元できます。
+              散らかったウィンドウを名前付きで保存し、あとから必要になったときに
+              まとめて戻せます。
             </p>
           </article>
-          <article class="feature-card">
-            <div class="icon-chip">04</div>
-            <h3>条件に一致するタブを閉じる</h3>
+          <article class="detail-card">
+            <span class="number">04</span>
+            <h3>条件に合うタブを閉じる</h3>
             <p>
-              よく閉じるサイトのプリセットや、自分で入力した文字をもとに、該当タブを確認してから閉じられます。
+              よく使うプリセットや自分で入力した言葉でタブを探し、確認してから
+              まとめて閉じられます。
             </p>
           </article>
         </div>
       </section>
 
-      <section class="section muted" aria-label="安全設計">
-        <div class="shell two-column">
+      <section class="section shell" aria-label="安全設計">
+        <div class="safety-band">
           <div>
             <p class="eyebrow">安全設計</p>
-            <h2>作業を壊さないことを優先。</h2>
-            <p>
-              Tab Reliefは、使っていない背景タブを中心に整理します。アクティブ、固定、音声再生中、ローカル、拡張機能、保護ドメインのタブは初期状態で守られます。
+            <h2>作業中のタブを壊さないことを優先します。</h2>
+            <p class="lede">
+              Tab Reliefは、使っていないバックグラウンドタブを中心に整理します。
+              作業中、音声再生中、固定、ローカル、拡張機能、保護済みドメインのタブは
+              初期状態で守られます。
             </p>
           </div>
-          <div class="check-list">
-            <div><span aria-hidden="true">OK</span> 細かい操作の前にタブを確認できます</div>
-            <div><span aria-hidden="true">OK</span> 特定サイトを自動スリープから除外できます</div>
-            <div><span aria-hidden="true">OK</span> 閉じる前にワークスペース保存できます</div>
-            <div><span aria-hidden="true">OK</span> タブ整理の設定はブラウザ内を中心に保存します</div>
+          <div class="safety-list">
+            <div><b>OK</b><span>閉じる操作の前に対象タブを確認できます</span></div>
+            <div><b>OK</b><span>重要なドメインを自動スリープから外せます</span></div>
+            <div><b>OK</b><span>作業ウィンドウを保存してから整理できます</span></div>
+            <div><b>OK</b><span>操作前に軽量化の目安を確認できます</span></div>
           </div>
         </div>
       </section>
 
       <section id="install" class="section shell">
-        <div class="install-layout">
-          <div class="section-heading compact">
+        <div class="install-grid">
+          <div class="section-heading">
             <p class="eyebrow">インストール</p>
-            <h2>Chrome Web Storeで公開予定です。</h2>
+            <h2>Chrome Web Storeで公開準備中です。</h2>
             <p>
-              公開後はここから直接インストールできます。公開前の審査・テスト確認が必要な場合は、下のボタンからアクセスを依頼してください。
+              公開後は、ここに直接インストールできるリンクを置きます。
+              公開前の確認用アクセスが必要な場合は、メールで依頼できます。
             </p>
           </div>
-
-          <div class="install-card" aria-label="インストール状況">
-            <div class="install-status">
-              <span>現在の状況</span>
-              <strong>Chrome Web Storeの公開準備中</strong>
+          <aside class="panel install-card" aria-label="インストール状況">
+            <div class="status-box">
+              <span>現在の状態</span>
+              <strong>Chrome Web Store公開に向けて準備中</strong>
             </div>
-            <div class="hero-actions install-actions" aria-label="インストール操作">
-              <span class="button primary is-disabled" aria-disabled="true">ストア公開待ち</span>
+            <div class="stack-actions">
+              <span class="button primary disabled" aria-disabled="true">ストアリンク準備中</span>
               <a class="button secondary" href="mailto:subaruu0130@gmail.com?subject=Tab%20Relief%20reviewer%20access">
-                審査・テスト用アクセスを依頼
+                レビュー用アクセスを依頼
               </a>
             </div>
             <p class="fine-print">
-              一般ユーザーの無料トライアルは、Chrome Web Store公開後に拡張機能内から開始できます。このリンクは公開前の審査・テスト確認用です。
+              一般公開後は、拡張機能の中から14日間無料トライアルを開始できます。
             </p>
-          </div>
+          </aside>
         </div>
       </section>
 
       <section id="pricing" class="section shell">
-        <div class="pricing-layout">
-          <div class="section-heading compact">
+        <div class="pricing-grid">
+          <div class="section-heading">
             <p class="eyebrow">シンプルなサブスク</p>
-            <h2>インストールは無料。まずは14日間お試し。</h2>
+            <h2>インストールは無料。操作は14日間試せます。</h2>
             <p>
-              タブ数や軽量化の目安は、支払い前に確認できます。タブの休止、保存、整理を実行するには、有効なトライアルまたはサブスクリプションが必要です。
+              タブ数や軽量化の目安は先に確認できます。タブの休止、ワークスペース保存、
+              サイト保護、自動スリープ、条件に合うタブの整理は、有効なトライアルまたは
+              サブスクリプションで使えます。
             </p>
           </div>
-
-          <div class="pricing-card" aria-label="Tab Reliefの料金">
+          <aside class="panel price-card" aria-label="料金">
             <div class="price-row">
-              <div>
-                <span class="price-label">月額</span>
+              <div class="price-box">
+                <span>月額</span>
                 <strong>$1.30</strong>
-                <span>/ 月</span>
+                <small>/ 月</small>
               </div>
-              <div>
-                <span class="price-label">年額</span>
+              <div class="price-box">
+                <span>年額</span>
                 <strong>$10</strong>
-                <span>/ 年</span>
+                <small>/ 年</small>
               </div>
             </div>
-            <div class="trial-box">
-              <strong>14日間無料トライアル</strong>
-              <span>支払いはExtensionPayとStripeで安全に処理されます。Tab Reliefはカード番号を保存しません。</span>
+            <div class="trial-note">
+              14日間無料トライアル。支払いとカード情報の処理はExtensionPayとStripeで行われます。
             </div>
-            <a class="button primary full" href="#install">
-              インストール方法を見る
-            </a>
-            <p class="fine-print">
-              一般ユーザーの14日間無料トライアルは、Chrome Web Store公開後に拡張機能内から開始できます。
-            </p>
-          </div>
+            <a class="button primary full" href="#install">インストール状況を見る</a>
+          </aside>
         </div>
       </section>
 
-      <section id="faq" class="section shell">
-        <div class="section-heading compact">
+      <section class="section shell" aria-labelledby="faq-title">
+        <div class="section-heading">
           <p class="eyebrow">FAQ</p>
-          <h2>申し込む前に、不安を残さない。</h2>
+          <h2 id="faq-title">申し込む前に、不安を残さないために。</h2>
         </div>
         <div class="faq-grid">
           <article>
             <h3>メモリ削減量は保証されますか？</h3>
             <p>
-              いいえ。最終的なメモリ解放はChrome側の挙動に左右されます。Tab Reliefは安全な背景タブの休止と整理を助けますが、削減量はサイトや端末によって変わります。
+              いいえ。最終的なメモリの扱いはChrome側の挙動に左右されます。
+              Tab Reliefは使っていないタブの休止と整理を助けますが、削減量はサイトや端末によって変わります。
             </p>
           </article>
           <article>
-            <h3>カード情報を保存しますか？</h3>
+            <h3>カード情報は保存されますか？</h3>
             <p>
               いいえ。支払いはExtensionPayとStripeで処理されます。Tab Relief自体はカード番号を保存しません。
             </p>
@@ -263,40 +310,25 @@
           <article>
             <h3>キャンセルできますか？</h3>
             <p>
-              はい。ExtensionPayとStripeが提供する請求ポータルから、サブスクリプションを管理できます。困ったときはサポートに連絡できます。
+              はい。サブスクリプションは、ExtensionPayとStripeが提供する請求ポータルから管理できます。
             </p>
           </article>
           <article>
             <h3>どんなデータを使いますか？</h3>
             <p>
-              タブのタイトル、ドメイン、URL、タブ状態を読み取り、休止・保護・保存・閉じる判断に使います。詳しくはプライバシーポリシーをご確認ください。
+              タブのタイトル、ドメイン、URL、状態を読み取り、休止・保護・保存・整理の判断に使います。
             </p>
           </article>
-        </div>
-      </section>
-
-      <section class="cta shell" aria-label="問い合わせ">
-        <div>
-          <p class="eyebrow">公開準備中</p>
-          <h2>タブは残す。重さは減らす。</h2>
-          <p>Tab Reliefは、Chromeで作業し続ける人のための、落ち着いたタブ整理ツールです。</p>
-        </div>
-        <div class="cta-actions">
-          <a class="button primary" href="#install">インストール状況を見る</a>
-          <a class="button secondary" href="mailto:subaruu0130@gmail.com?subject=Tab%20Relief%20support">サポートに連絡</a>
         </div>
       </section>
     </main>
 
     <footer class="footer">
       <div class="shell footer-grid">
-        <div>
-          <a class="brand footer-brand" href="index.html?lang=ja">
-            <img class="brand-mark" src="../assets/mark.svg" alt="" width="32" height="32">
-            <span>Tab Relief</span>
-          </a>
-          <p>Chromeタブのメモリ整理ツール by Subaru0130.</p>
-        </div>
+        <a class="brand" href="index.html?lang=ja">
+          <img src="../assets/mark.svg" alt="" width="32" height="32">
+          <span>Tab Relief</span>
+        </a>
         <div class="footer-links">
           <a href="privacy.html">プライバシーポリシー</a>
           <a href="terms.html">利用規約</a>
