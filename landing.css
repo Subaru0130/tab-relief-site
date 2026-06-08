@@ -234,7 +234,7 @@ a:focus-visible {
   display: grid;
   grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
   gap: 18px;
-  align-items: start;
+  align-items: stretch;
   margin-top: 44px;
   text-align: left;
 }
@@ -242,60 +242,23 @@ a:focus-visible {
 .popup-panel {
   display: grid;
   gap: 14px;
+  align-content: start;
   padding: 26px;
 }
 
-.preview-context {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-  justify-content: space-between;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 10px 12px;
-  background: #fbfdff;
+.preview-caption {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+}
+
+.preview-caption .eyebrow {
+  margin-bottom: 6px;
+}
+
+.preview-caption span {
   color: var(--muted);
   font-size: 14px;
-}
-
-.preview-context strong {
-  color: var(--ink);
-  font-size: 14px;
-  letter-spacing: -0.02em;
-}
-
-.toolbar-chip {
-  display: inline-flex;
-  gap: 8px;
-  align-items: center;
-  font-weight: 850;
-}
-
-.toolbar-icon {
-  display: inline-flex;
-  flex: 0 0 auto;
-  flex-direction: column;
-  gap: 3px;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 9px;
-  background: var(--blue);
-  box-shadow: 0 10px 22px rgba(31, 111, 235, 0.18);
-}
-
-.toolbar-icon i {
-  display: block;
-  width: 14px;
-  height: 3px;
-  border-radius: 999px;
-  background: #ffffff;
-}
-
-.toolbar-icon i:nth-child(2) {
-  width: 18px;
+  font-weight: 700;
 }
 
 .popup-preview {
@@ -495,6 +458,8 @@ a:focus-visible {
 }
 
 .control-card {
+  display: flex;
+  flex-direction: column;
   padding: 26px;
 }
 
@@ -555,6 +520,39 @@ a:focus-visible {
   color: var(--muted);
   font-size: 14px;
   line-height: 1.45;
+}
+
+.secondary-tools {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px;
+  background: #fbfdff;
+}
+
+.secondary-tools strong {
+  display: block;
+}
+
+.secondary-tool-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.secondary-tool-grid span {
+  display: grid;
+  place-items: center;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 8px;
+  color: var(--muted);
+  background: #ffffff;
+  font-size: 13px;
+  font-weight: 850;
+  text-align: center;
 }
 
 .section {
@@ -826,6 +824,10 @@ a:focus-visible {
   }
 
   .price-row {
+    grid-template-columns: 1fr;
+  }
+
+  .secondary-tool-grid {
     grid-template-columns: 1fr;
   }
 }
