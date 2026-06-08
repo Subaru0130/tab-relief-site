@@ -234,13 +234,68 @@ a:focus-visible {
   display: grid;
   grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
   gap: 18px;
-  align-items: stretch;
+  align-items: start;
   margin-top: 44px;
   text-align: left;
 }
 
 .popup-panel {
+  display: grid;
+  gap: 14px;
   padding: 26px;
+}
+
+.preview-context {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 10px 12px;
+  background: #fbfdff;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.preview-context strong {
+  color: var(--ink);
+  font-size: 14px;
+  letter-spacing: -0.02em;
+}
+
+.toolbar-chip {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  font-weight: 850;
+}
+
+.toolbar-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 3px;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: var(--blue);
+  box-shadow: 0 10px 22px rgba(31, 111, 235, 0.18);
+}
+
+.toolbar-icon i {
+  display: block;
+  width: 14px;
+  height: 3px;
+  border-radius: 999px;
+  background: #ffffff;
+}
+
+.toolbar-icon i:nth-child(2) {
+  width: 18px;
 }
 
 .popup-preview {
@@ -448,55 +503,58 @@ a:focus-visible {
   font-size: clamp(34px, 3.4vw, 48px);
 }
 
-.proof-list {
+.control-copy {
+  max-width: 600px;
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.workflow-list {
   display: grid;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 20px;
 }
 
-.proof-row {
+.workflow-row {
   display: grid;
   grid-template-columns: 42px minmax(0, 1fr);
   gap: 12px;
-  align-items: center;
-  min-height: 76px;
+  align-items: start;
+  min-height: 84px;
   border-bottom: 1px solid var(--line);
-  padding: 14px 16px;
+  padding: 16px;
 }
 
-.proof-row:last-child {
+.workflow-row:last-child {
   border-bottom: 0;
 }
 
-.proof-icon {
-  display: block;
+.step-number {
+  display: grid;
+  place-items: center;
   width: 34px;
   height: 34px;
-  border-radius: 12px;
+  border-radius: 999px;
+  color: var(--blue-strong);
   background: #eaf2ff;
+  font-size: 13px;
+  font-weight: 900;
 }
 
-.proof-icon.blue {
-  background: #eaf2ff;
-}
-
-.proof-icon.amber {
-  background: #fff5d6;
-}
-
-.proof-icon.red {
-  background: #ffe9e7;
-}
-
-.proof-row strong {
+.workflow-row strong {
   display: block;
   letter-spacing: -0.03em;
 }
 
-.proof-row span:last-child {
+.workflow-row span:last-child {
+  display: block;
+  margin-top: 4px;
   color: var(--muted);
   font-size: 14px;
+  line-height: 1.45;
 }
 
 .section {
