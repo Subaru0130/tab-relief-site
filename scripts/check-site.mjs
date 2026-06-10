@@ -25,7 +25,9 @@ const checks = [
   ["english hero", "index.html", /Lighten Chrome\. Keep your tabs\./],
   ["english install CTA", "index.html", /Get Tab Relief/],
   ["english close feature", "index.html", /Close matching clutter[\s\S]*controlled review step/],
-  ["english pricing", "index.html", /\$1\.30[\s\S]*\$10[\s\S]*14-day free trial/],
+  ["english pricing", "index.html", /\$1\.30[\s\S]*\$10[\s\S]*Payment method required/],
+  ["english first-time trial", "index.html", /first-time accounts only/],
+  ["english billing route", "index.html", /Open Billing in the extension[\s\S]*manage or cancel/],
   ["english processors", "index.html", /ExtensionPay and Stripe/],
   ["english install status", "index.html", /Preparing for Chrome Web Store publication/],
   ["japanese title", "ja/index.html", /<title>Tab Relief \| Chromeを軽く。タブは残す。<\/title>/],
@@ -34,7 +36,8 @@ const checks = [
   ["japanese install CTA", "ja/index.html", /Tab Reliefを入手/],
   ["japanese close feature", "ja/index.html", /条件に合うタブを閉じる[\s\S]*確認してから[\s\S]*まとめて閉じられます/],
   ["japanese pricing", "ja/index.html", /\$1\.30[\s\S]*\/ 月[\s\S]*\$10[\s\S]*\/ 年/],
-  ["japanese trial", "ja/index.html", /14日間無料トライアル/],
+  ["japanese trial", "ja/index.html", /支払い方法[\s\S]*14日間[\s\S]*自動更新/],
+  ["japanese billing route", "ja/index.html", /「請求」画面[\s\S]*管理またはキャンセル/],
   ["privacy link", "index.html", /privacy\.html/],
   ["terms link", "index.html", /terms\.html/],
   ["contact email", "index.html", /subaruu0130@gmail\.com/i],
@@ -44,7 +47,10 @@ const checks = [
   ["landing mobile breakpoint", "landing.css", /@media \(max-width: 640px\)/],
   ["privacy data scope", "privacy.html", /Tab titles, domains, URLs/i],
   ["privacy payment details", "privacy.html", /does not store card numbers/i],
+  ["privacy billing route", "privacy.html", /Billing screen inside the extension/i],
   ["terms refund", "terms.html", /Refund requests/i],
+  ["terms first-time trial", "terms.html", /first-time accounts/i],
+  ["terms billing route", "terms.html", /Billing screen inside the extension/i],
   ["terms memory guarantee", "terms.html", /No exact memory guarantee/i]
 ];
 
@@ -63,6 +69,15 @@ for (const [name, file, pattern] of checks) {
   if (!pattern.test(content)) {
     failures.push(`Failed check: ${name} in ${file}`);
   }
+}
+
+const japaneseIndex = await readFile(path.join(root, "ja/index.html"), "utf8");
+const japaneseTerms = await readFile(path.join(root, "ja/terms.html"), "utf8");
+if (!/初回利用/.test(japaneseIndex)) {
+  failures.push("Failed check: japanese first-time trial in ja/index.html");
+}
+if (!/初回利用[\s\S]*以前に同じメールアドレス/.test(japaneseTerms)) {
+  failures.push("Failed check: japanese first-time trial in ja/terms.html");
 }
 
 for (const file of ["index.html", "ja/index.html"]) {

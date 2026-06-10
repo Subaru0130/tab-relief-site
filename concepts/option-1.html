@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tab Relief Concept 1 - Measured Relief</title>
+    <link rel="icon" href="../assets/mark.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="concepts.css">
+    <style>
+      body {
+        background:
+          radial-gradient(circle at 86% 4%, rgba(31, 111, 235, 0.13), transparent 28%),
+          linear-gradient(180deg, #fbfdff 0%, #ffffff 44%, #f5f8fc 100%);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(380px, 0.78fr);
+        gap: 52px;
+        align-items: center;
+        min-height: 760px;
+        padding: 68px 0 84px;
+      }
+
+      .proof-panel {
+        padding: 24px;
+      }
+
+      .bench {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .bench-card {
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 18px;
+        background: #f8fbff;
+      }
+
+      .bench-card strong {
+        display: block;
+        font-size: 34px;
+        line-height: 1;
+        letter-spacing: -0.06em;
+      }
+
+      .bench-card span {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 750;
+      }
+
+      .sequence {
+        display: grid;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .sequence div {
+        display: grid;
+        grid-template-columns: 28px minmax(0, 1fr);
+        gap: 10px;
+        align-items: center;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .sequence b {
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 999px;
+        color: #ffffff;
+        background: var(--blue);
+        font-size: 12px;
+      }
+
+      .section {
+        padding: 84px 0 0;
+      }
+
+      @media (max-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="shell nav">
+      <a class="brand" href="../index.html">
+        <img src="../assets/mark.svg" alt="">
+        <span>Tab Relief</span>
+      </a>
+      <nav class="nav-links" aria-label="Concept links">
+        <a href="option-1.html">Measured</a>
+        <a href="option-2.html">Calm SaaS</a>
+        <a href="option-3.html">Store-ready</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero shell">
+        <div>
+          <p class="eyebrow">Concept 1 - measured proof first</p>
+          <h1>Make Chrome lighter, with numbers you can trust.</h1>
+          <p class="lede">
+            Tab Relief sleeps inactive tabs with Chrome's native discard behavior, then keeps your
+            important tabs protected. The page leads with measured memory relief instead of vague promises.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#install">Install from Chrome Web Store</a>
+            <a class="button secondary" href="#benchmark">See the benchmark</a>
+          </div>
+          <p class="note">Best when we want the product to feel serious, verifiable, and worth paying for.</p>
+        </div>
+
+        <aside class="panel proof-panel" id="benchmark" aria-label="Memory relief proof">
+          <p class="eyebrow">Local benchmark</p>
+          <div class="bench">
+            <article class="bench-card">
+              <strong>10</strong>
+              <span>inactive tabs slept</span>
+            </article>
+            <article class="bench-card">
+              <strong>1.48 GB</strong>
+              <span>Working Set reduced</span>
+            </article>
+          </div>
+          <div class="popup-card">
+            <div class="popup-top">
+              <div class="popup-logo">TR</div>
+              <div class="popup-title">
+                <strong>Tab Relief</strong>
+                <span>Chrome memory organizer</span>
+              </div>
+              <span class="pill">Trial</span>
+            </div>
+            <div class="popup-action">
+              <div aria-hidden="true">moon</div>
+              <div>
+                <strong>Sleep inactive tabs</strong>
+                <span>Active, pinned, and audio tabs stay awake</span>
+              </div>
+              <b aria-hidden="true">›</b>
+            </div>
+          </div>
+          <div class="sequence">
+            <div><b>1</b><span>Detect safe inactive tabs</span></div>
+            <div><b>2</b><span>Sleep them without closing the page</span></div>
+            <div><b>3</b><span>Restore a tab when you click it again</span></div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section shell">
+        <div class="feature-grid">
+          <article class="feature">
+            <h3>Proof before polish</h3>
+            <p>Uses a benchmark block above the fold so users understand the value quickly.</p>
+          </article>
+          <article class="feature">
+            <h3>Safety is explicit</h3>
+            <p>Explains that important tabs stay awake before asking the user to install.</p>
+          </article>
+          <article class="feature">
+            <h3>Good for paid conversion</h3>
+            <p>Numbers make the subscription feel less abstract and easier to justify.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="install" class="footer-cta shell panel">
+        <p class="eyebrow">Launch path</p>
+        <h2>Free install. 14-day trial inside the extension.</h2>
+        <p class="lede">Use this direction if the main objection is: "Does it actually save memory?"</p>
+        <div class="hero-actions" style="justify-content:center">
+          <a class="button primary" href="../index.html#install">Use this direction</a>
+          <a class="button secondary" href="option-2.html">View next concept</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
