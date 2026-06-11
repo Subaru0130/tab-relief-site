@@ -38,6 +38,8 @@ Tab Relief keeps Chrome lighter without forcing the user to close important tabs
 
 - English should sound like a polished SaaS product, not technical documentation.
 - Japanese should be natural product Japanese, not literal translation.
+- Write the hero line directly for the locale. Do not mirror English fragment-by-fragment.
+- For Japanese, avoid slogan fragments like 「Chromeを軽く。タブは残す。」. Prefer a complete, natural benefit sentence such as 「タブを閉じずに、Chromeを軽く。」.
 - Prefer user outcomes over implementation terms.
 - Use "lighter Chrome", "keep your place", "save workspaces", and "protect important sites" as the core message.
 - Pricing and install copy must make the pre-launch state obvious.

@@ -30,9 +30,9 @@ const checks = [
   ["english billing route", "index.html", /Open Billing in the extension[\s\S]*manage or cancel/],
   ["english processors", "index.html", /ExtensionPay and Stripe/],
   ["english install status", "index.html", /Preparing for Chrome Web Store publication/],
-  ["japanese title", "ja/index.html", /<title>Tab Relief \| Chromeを軽く。タブは残す。<\/title>/],
+  ["japanese title", "ja/index.html", /<title>Tab Relief \| タブを閉じずに、Chromeを軽く。<\/title>/],
   ["japanese language switch", "ja/index.html", /data-language-choice="en"[\s\S]*日本語/],
-  ["japanese hero", "ja/index.html", /Chromeを軽く。[\s\S]*タブは残す。/],
+  ["japanese hero", "ja/index.html", /タブを閉じずに、[\s\S]*Chromeを軽く。/],
   ["japanese install CTA", "ja/index.html", /Tab Reliefを入手/],
   ["japanese close feature", "ja/index.html", /条件に合うタブを閉じる[\s\S]*確認してから[\s\S]*まとめて閉じられます/],
   ["japanese pricing", "ja/index.html", /\$1\.30[\s\S]*\/ 月[\s\S]*\$12\.99[\s\S]*\/ 年/],
@@ -129,7 +129,7 @@ for (const file of ["index.html", "ja/index.html", "terms.html", "ja/terms.html"
 }
 
 const japaneseHome = await readFile(path.join(root, "ja/index.html"), "utf8");
-for (const forbidden of ["Monthly", "Yearly", "/ month", "/ year", "Chromeを軽くすることを試す"]) {
+for (const forbidden of ["Monthly", "Yearly", "/ month", "/ year", "Chromeを軽くすることを試す", "Chromeを軽く。タブは残す。", "タブは残す。"]) {
   if (japaneseHome.includes(forbidden)) {
     failures.push(`Unnatural or untranslated Japanese home copy found: ${forbidden}`);
   }
