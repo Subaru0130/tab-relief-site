@@ -3,6 +3,7 @@ import path from "node:path";
 import vm from "node:vm";
 
 const root = process.cwd();
+const supportedLocales = ["en", "ja"];
 const requiredFiles = [
   "index.html",
   "privacy.html",
@@ -15,6 +16,8 @@ const requiredFiles = [
   "styles.css",
   "landing.css",
   "assets/mark.svg",
+  "docs/locales/en.md",
+  "docs/locales/ja.md",
   "robots.txt",
   "sitemap.xml"
 ];
@@ -63,6 +66,8 @@ for (const file of requiredFiles) {
     failures.push(`Missing required file: ${file}`);
   }
 }
+
+await checkLocaleGuides(supportedLocales);
 
 for (const [name, file, pattern] of checks) {
   const content = await readFile(path.join(root, file), "utf8");
@@ -175,6 +180,29 @@ if (failures.length) {
 }
 
 console.log(`OK: ${requiredFiles.length} files and ${checks.length} content checks passed.`);
+
+async function checkLocaleGuides(locales) {
+  const requiredSections = [
+    "## Native Quality Status",
+    "## Tone",
+    "## Billing Vocabulary",
+    "## Forbidden Literal Phrases",
+    "## Marketing And Hero Copy"
+  ];
+
+  for (const locale of locales) {
+    const guidePath = `docs/locales/${locale}.md`;
+    const guide = await readFile(path.join(root, guidePath), "utf8");
+    for (const section of requiredSections) {
+      if (!guide.includes(section)) {
+        failures.push(`${guidePath} is missing required section: ${section}`);
+      }
+    }
+    if (!/Status:\s*production-supported|Status:\s*native-reviewed|Status:\s*blocked-until-native-review/.test(guide)) {
+      failures.push(`${guidePath} must declare a native quality status.`);
+    }
+  }
+}
 
 function simulateLanguageRoute(source, input) {
   let replacement = "";

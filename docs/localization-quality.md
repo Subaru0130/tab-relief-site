@@ -10,6 +10,15 @@ Tab Relief's landing page should read as native product copy in each supported l
 4. Keep billing terms close to the pricing section and FAQ.
 5. Run `npm run copy-quality` before committing.
 6. Add locale-specific banned phrases to `scripts/check-site.mjs` when adding a new language.
+7. For every supported language, keep a required locale guide at `docs/locales/<language>.md`. The site check fails if the guide is missing.
+
+## Scaling To More Languages
+
+- Do not add many machine-translated pages at once.
+- Add one language at a time.
+- Do not publish a language unless its locale guide declares `Status: production-supported` or `Status: native-reviewed`.
+- If native review is not available, keep that language blocked or fall back to English.
+- Write hero copy, pricing copy, cancellation copy, and destructive-action explanations directly for the locale instead of translating the English line.
 
 ## Japanese Rules
 
