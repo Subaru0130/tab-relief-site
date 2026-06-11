@@ -41,6 +41,9 @@ Tab Relief keeps Chrome lighter without forcing the user to close important tabs
 - Prefer user outcomes over implementation terms.
 - Use "lighter Chrome", "keep your place", "save workspaces", and "protect important sites" as the core message.
 - Pricing and install copy must make the pre-launch state obvious.
+- Keep the trial terms aligned with the extension: the 14-day trial does not require a card and does not automatically become a paid plan.
+- Avoid stiff Japanese billing labels such as 「自動課金なし」, 「試用済み」, 「請求ポータル」, and vague 「アカウントページ」. Prefer 「自動で有料プランに切り替わることはありません」, 「すでに無料トライアルを利用したメールアドレス」, and 「契約・支払いページ」.
+- Do not leave design-process labels in user-facing pages. Avoid "Calm SaaS", "Store-ready", "Measured", or similar internal concept language.
 
 ## Layout Priorities
 

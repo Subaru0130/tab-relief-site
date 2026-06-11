@@ -50,7 +50,7 @@ The page uses a restrained product-marketing layout inspired by mature SaaS page
 - One primary action color: blue for install and subscription actions.
 - Neutral surfaces and consistent card spacing so the content feels calmer than the extension problem it solves.
 - Legal, payment, cancellation, and billing-management information is visible instead of hidden, which helps Stripe review and user trust.
-- The public copy matches the extension flow: users start the trial from the extension and manage or cancel later from the extension's Billing screen, with ExtensionPay and Stripe handling the secure billing portal.
+- The public copy matches the extension flow: users start the card-free trial from the extension, choose a paid plan only when they want to continue, and manage or cancel later from the extension's Billing screen with ExtensionPay and Stripe handling billing.
 - Mobile layout collapses into a single-column flow with full-width primary actions.
 - English remains the default review URL, while Japanese users can be routed to `/ja/` through browser-language detection or a visible language switch.
 

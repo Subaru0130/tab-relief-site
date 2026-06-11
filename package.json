@@ -5,6 +5,7 @@
   "description": "Public GitHub Pages landing page for Tab Relief.",
   "scripts": {
     "capture": "node scripts/capture-preview.mjs",
+    "copy-quality": "node scripts/check-site.mjs",
     "check": "node scripts/check-site.mjs",
     "serve": "node scripts/serve.mjs"
   }

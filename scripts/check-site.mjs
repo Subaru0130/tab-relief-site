@@ -25,8 +25,8 @@ const checks = [
   ["english hero", "index.html", /Lighten Chrome\. Keep your tabs\./],
   ["english install CTA", "index.html", /Get Tab Relief/],
   ["english close feature", "index.html", /Close matching clutter[\s\S]*controlled review step/],
-  ["english pricing", "index.html", /\$1\.30[\s\S]*\$10[\s\S]*Payment method required/],
-  ["english first-time trial", "index.html", /first-time accounts only/],
+  ["english pricing", "index.html", /\$1\.30[\s\S]*\$12\.99[\s\S]*does not require a card[\s\S]*will not become a paid plan automatically/],
+  ["english first-time trial", "index.html", /limited to one per email address/],
   ["english billing route", "index.html", /Open Billing in the extension[\s\S]*manage or cancel/],
   ["english processors", "index.html", /ExtensionPay and Stripe/],
   ["english install status", "index.html", /Preparing for Chrome Web Store publication/],
@@ -35,9 +35,9 @@ const checks = [
   ["japanese hero", "ja/index.html", /Chromeを軽く。[\s\S]*タブは残す。/],
   ["japanese install CTA", "ja/index.html", /Tab Reliefを入手/],
   ["japanese close feature", "ja/index.html", /条件に合うタブを閉じる[\s\S]*確認してから[\s\S]*まとめて閉じられます/],
-  ["japanese pricing", "ja/index.html", /\$1\.30[\s\S]*\/ 月[\s\S]*\$10[\s\S]*\/ 年/],
-  ["japanese trial", "ja/index.html", /支払い方法[\s\S]*14日間[\s\S]*自動更新/],
-  ["japanese billing route", "ja/index.html", /「請求」画面[\s\S]*管理またはキャンセル/],
+  ["japanese pricing", "ja/index.html", /\$1\.30[\s\S]*\/ 月[\s\S]*\$12\.99[\s\S]*\/ 年/],
+  ["japanese trial", "ja/index.html", /カード登録なし[\s\S]*14日間無料トライアル[\s\S]*自動で有料プランに切り替わることはありません/],
+  ["japanese billing route", "ja/index.html", /「請求」画面[\s\S]*契約・支払いページ[\s\S]*管理またはキャンセル/],
   ["privacy link", "index.html", /privacy\.html/],
   ["terms link", "index.html", /terms\.html/],
   ["contact email", "index.html", /subaruu0130@gmail\.com/i],
@@ -49,7 +49,7 @@ const checks = [
   ["privacy payment details", "privacy.html", /does not store card numbers/i],
   ["privacy billing route", "privacy.html", /Billing screen inside the extension/i],
   ["terms refund", "terms.html", /Refund requests/i],
-  ["terms first-time trial", "terms.html", /first-time accounts/i],
+  ["terms first-time trial", "terms.html", /one use per email address/i],
   ["terms billing route", "terms.html", /Billing screen inside the extension/i],
   ["terms memory guarantee", "terms.html", /No exact memory guarantee/i]
 ];
@@ -73,14 +73,14 @@ for (const [name, file, pattern] of checks) {
 
 const japaneseIndex = await readFile(path.join(root, "ja/index.html"), "utf8");
 const japaneseTerms = await readFile(path.join(root, "ja/terms.html"), "utf8");
-if (!/初回利用/.test(japaneseIndex)) {
+if (!/メールアドレスごとに1回/.test(japaneseIndex)) {
   failures.push("Failed check: japanese first-time trial in ja/index.html");
 }
-if (!/初回利用[\s\S]*以前に同じメールアドレス/.test(japaneseTerms)) {
+if (!/メールアドレスごとに1回[\s\S]*同じメールアドレス/.test(japaneseTerms)) {
   failures.push("Failed check: japanese first-time trial in ja/terms.html");
 }
 
-for (const file of ["index.html", "ja/index.html"]) {
+for (const file of ["index.html", "ja/index.html", "terms.html", "ja/terms.html", "privacy.html", "ja/privacy.html", "concepts/option-1.html", "concepts/option-2.html", "concepts/option-3.html"]) {
   const content = await readFile(path.join(root, file), "utf8");
   if (/縺|繧|譌|隱|蜷|莨/.test(content)) {
     failures.push(`Encoding artifact found in ${file}`);
@@ -108,6 +108,23 @@ for (const file of ["index.html", "ja/index.html"]) {
   }
   if (/(^|>|\s)0\s*MB(\s|<|$)/.test(content)) {
     failures.push(`Value-killing zero metric found in ${file}`);
+  }
+  for (const forbidden of [
+    "Payment method required",
+    "requires a payment method",
+    "billing portal",
+    "請求ポータル",
+    "支払い方法を登録",
+    "自動更新されます",
+    "初回利用",
+    "試用済み",
+    "自動課金",
+    "アカウントページ",
+    "管理画面"
+  ]) {
+    if (content.includes(forbidden)) {
+      failures.push(`Unnatural or outdated billing copy found in ${file}: ${forbidden}`);
+    }
   }
 }
 
