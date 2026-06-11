@@ -24,6 +24,7 @@ Status: production-supported
 
 - 「Chromeを軽く。タブは残す。」
 - 「タブは残す。」
+- 「サブスク」
 - 「自動課金なし」
 - 「試用済み」
 - 「請求ポータル」

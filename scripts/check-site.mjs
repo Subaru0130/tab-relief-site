@@ -23,11 +23,11 @@ const requiredFiles = [
 ];
 
 const checks = [
-  ["english title", "index.html", /<title>Tab Relief \| Lighten Chrome\. Keep your tabs\.<\/title>/],
+  ["english title", "index.html", /<title>Tab Relief \| Keep Chrome lighter without closing your tabs\.<\/title>/],
   ["english language switch", "index.html", /data-language-choice="ja"[\s\S]*日本語/],
-  ["english hero", "index.html", /Lighten Chrome\. Keep your tabs\./],
+  ["english hero", "index.html", /Keep Chrome lighter without closing your tabs\./],
   ["english install CTA", "index.html", /Get Tab Relief/],
-  ["english close feature", "index.html", /Close matching clutter[\s\S]*controlled review step/],
+  ["english close feature", "index.html", /Close matching tabs[\s\S]*controlled review step/],
   ["english pricing", "index.html", /\$1\.30[\s\S]*\$12\.99[\s\S]*does not require a card[\s\S]*will not become a paid plan automatically/],
   ["english first-time trial", "index.html", /limited to one per email address/],
   ["english billing route", "index.html", /Open Billing in the extension[\s\S]*manage or cancel/],
@@ -40,7 +40,7 @@ const checks = [
   ["japanese close feature", "ja/index.html", /条件に合うタブを閉じる[\s\S]*確認してから[\s\S]*まとめて閉じられます/],
   ["japanese pricing", "ja/index.html", /\$1\.30[\s\S]*\/ 月[\s\S]*\$12\.99[\s\S]*\/ 年/],
   ["japanese trial", "ja/index.html", /カード登録なし[\s\S]*14日間無料トライアル[\s\S]*自動で有料プランに切り替わることはありません/],
-  ["japanese billing route", "ja/index.html", /「請求」画面[\s\S]*契約・支払いページ[\s\S]*管理またはキャンセル/],
+  ["japanese billing route", "ja/index.html", /「契約・支払い」画面[\s\S]*契約・支払いページ[\s\S]*管理またはキャンセル/],
   ["privacy link", "index.html", /privacy\.html/],
   ["terms link", "index.html", /terms\.html/],
   ["contact email", "index.html", /subaruu0130@gmail\.com/i],
@@ -100,6 +100,10 @@ for (const file of ["index.html", "ja/index.html", "terms.html", "ja/terms.html"
     "Review</span>",
     "What it controls",
     "Light by default. Careful when it matters.",
+    "Lighten Chrome. Keep your tabs.",
+    "messy workspaces",
+    "Close matching clutter",
+    "matching tab clutter",
     "Chrome toolbar",
     "product-stage",
     "Click the Tab Relief icon. This popup opens.",
@@ -124,6 +128,7 @@ for (const file of ["index.html", "ja/index.html", "terms.html", "ja/terms.html"
     "初回利用",
     "試用済み",
     "自動課金",
+    "サブスク",
     "アカウントページ",
     "管理画面"
   ]) {

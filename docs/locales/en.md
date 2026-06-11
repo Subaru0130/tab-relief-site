@@ -28,9 +28,11 @@ English is the source locale for the landing page, but it still needs a native p
 - "billing portal"
 - "Start without a card"
 - "Memory estimate"
+- "Lighten Chrome. Keep your tabs."
 
 ## Marketing And Hero Copy
 
 - The hero should make the product job clear in five seconds: keep Chrome lighter without forcing the user to close important tabs.
+- Prefer "Keep Chrome lighter without closing your tabs." over short slogan fragments.
 - Product previews should support the promise, not look like fake buttons.
 - Metrics must show a representative useful state, never "0 MB" as the main proof.
