@@ -19,6 +19,14 @@ It is separate from the private extension repository on purpose: the public site
 npm run check
 ```
 
+## Add a locale draft
+
+```powershell
+npm run locale:draft -- fr "Français"
+```
+
+Rewrite the generated draft from `copy/site-spec.mjs` intent before enabling it in `copy/registry.mjs`.
+
 ## Visual preview capture
 
 ```powershell

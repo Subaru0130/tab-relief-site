@@ -7,6 +7,7 @@
     "capture": "node scripts/capture-preview.mjs",
     "copy-quality": "node scripts/check-site.mjs",
     "check": "node scripts/check-site.mjs",
+    "locale:draft": "node scripts/create-locale-draft.mjs",
     "serve": "node scripts/serve.mjs"
   }
 }

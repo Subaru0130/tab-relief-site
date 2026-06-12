@@ -39,6 +39,9 @@ Tab Relief keeps Chrome lighter without forcing the user to close important tabs
 - English should sound like a polished SaaS product, not technical documentation.
 - Japanese should be natural product Japanese, not literal translation.
 - Write the hero line directly for the locale. Do not mirror English fragment-by-fragment.
+- Add landing-page copy intent in `copy/site-spec.mjs`, not directly in HTML or `copy/site-copy.mjs`.
+- Write locale strings in `copy/locales/<language>.mjs`; keep enabled languages in `copy/registry.mjs`.
+- Before adding a new language, run `npm run locale:draft -- <code> "<Native name>"`, define the locale guide, rewrite all strings from intent, and keep it unregistered until native-reviewed or production-supported.
 - For Japanese, avoid slogan fragments like 「Chromeを軽く。タブは残す。」. Prefer a complete, natural benefit sentence such as 「タブを閉じずに、Chromeを軽く。」.
 - Every supported locale must have `docs/locales/<locale>.md` with tone, billing vocabulary, forbidden literal phrases, and marketing hero guidance before the locale can ship.
 - Prefer user outcomes over implementation terms.

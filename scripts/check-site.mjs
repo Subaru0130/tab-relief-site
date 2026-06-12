@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import vm from "node:vm";
-import { SITE_COPY, SUPPORTED_SITE_LANGUAGES } from "../copy/site-copy.mjs";
+import { SITE_COPY, SITE_COPY_SPECS, SITE_LOCALES, SUPPORTED_SITE_LANGUAGES } from "../copy/site-copy.mjs";
 
 const root = process.cwd();
 const supportedLocales = ["en", "ja"];
@@ -18,6 +18,10 @@ const requiredFiles = [
   "landing.css",
   "assets/mark.svg",
   "copy/site-copy.mjs",
+  "copy/site-spec.mjs",
+  "copy/registry.mjs",
+  "copy/locales/en.mjs",
+  "copy/locales/ja.mjs",
   "docs/locales/en.md",
   "docs/locales/ja.md",
   "robots.txt",
@@ -196,7 +200,27 @@ function checkSiteCopySource() {
     failures.push("SUPPORTED_SITE_LANGUAGES should match the public supported locales.");
   }
 
+  for (const locale of supportedLocales) {
+    if (!SITE_LOCALES[locale]) {
+      failures.push(`SITE_LOCALES is missing ${locale}.`);
+      continue;
+    }
+    if (!["production-supported", "native-reviewed"].includes(SITE_LOCALES[locale].status)) {
+      failures.push(`${locale} should not be public until native-reviewed or production-supported.`);
+    }
+    if (!SITE_LOCALES[locale].nativeName || !SITE_LOCALES[locale].direction) {
+      failures.push(`${locale} needs nativeName and direction metadata.`);
+    }
+  }
+
   const metadataKeys = ["surface", "intent", "constraint"];
+  for (const [key, spec] of Object.entries(SITE_COPY_SPECS)) {
+    const unexpectedKeys = Object.keys(spec).filter((field) => !metadataKeys.includes(field));
+    if (unexpectedKeys.length) {
+      failures.push(`SITE_COPY_SPECS.${key} should only contain communication metadata, not locale strings.`);
+    }
+  }
+
   for (const [key, copy] of Object.entries(SITE_COPY)) {
     for (const metadataKey of metadataKeys) {
       if (typeof copy[metadataKey] !== "string" || copy[metadataKey].trim().length < 8) {
@@ -207,6 +231,14 @@ function checkSiteCopySource() {
       if (typeof copy[locale] !== "string" || copy[locale].trim().length === 0) {
         failures.push(`SITE_COPY.${key}.${locale} is missing.`);
       }
+    }
+  }
+
+  const expectedKeys = Object.keys(SITE_COPY_SPECS).sort();
+  for (const locale of supportedLocales) {
+    const localeKeys = Object.keys(SITE_LOCALES[locale].messages).sort();
+    if (JSON.stringify(localeKeys) !== JSON.stringify(expectedKeys)) {
+      failures.push(`${locale} landing messages must exactly match site copy specs.`);
     }
   }
 }
