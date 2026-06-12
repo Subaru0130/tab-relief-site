@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import vm from "node:vm";
+import { SITE_COPY, SUPPORTED_SITE_LANGUAGES } from "../copy/site-copy.mjs";
 
 const root = process.cwd();
 const supportedLocales = ["en", "ja"];
@@ -16,6 +17,7 @@ const requiredFiles = [
   "styles.css",
   "landing.css",
   "assets/mark.svg",
+  "copy/site-copy.mjs",
   "docs/locales/en.md",
   "docs/locales/ja.md",
   "robots.txt",
@@ -23,22 +25,22 @@ const requiredFiles = [
 ];
 
 const checks = [
-  ["english title", "index.html", /<title>Tab Relief \| Keep Chrome lighter without closing your tabs\.<\/title>/],
+  ["english title", "index.html", new RegExp(`<title>Tab Relief \\| ${escapeRegExp(SITE_COPY.heroTitle.en)}</title>`)],
   ["english language switch", "index.html", /data-language-choice="ja"[\s\S]*日本語/],
-  ["english hero", "index.html", /Keep Chrome lighter without closing your tabs\./],
-  ["english install CTA", "index.html", /Get Tab Relief/],
-  ["english close feature", "index.html", /Close matching tabs[\s\S]*controlled review step/],
+  ["english hero", "index.html", new RegExp(escapeRegExp(SITE_COPY.heroTitle.en))],
+  ["english install CTA", "index.html", new RegExp(escapeRegExp(SITE_COPY.primaryCta.en))],
+  ["english close feature", "index.html", new RegExp(`${escapeRegExp(SITE_COPY.closeFeatureTitle.en)}[\\s\\S]*${escapeRegExp("controlled review step")}`)],
   ["english pricing", "index.html", /\$1\.30[\s\S]*\$12\.99[\s\S]*does not require a card[\s\S]*will not become a paid plan automatically/],
   ["english first-time trial", "index.html", /limited to one per email address/],
   ["english billing route", "index.html", /Open Billing in the extension[\s\S]*manage or cancel/],
   ["english processors", "index.html", /ExtensionPay and Stripe/],
   ["english install status", "index.html", /Preparing for Chrome Web Store publication/],
-  ["japanese title", "ja/index.html", /<title>Tab Relief \| タブを閉じずに、Chromeを軽く。<\/title>/],
+  ["japanese title", "ja/index.html", new RegExp(`<title>Tab Relief \\| ${escapeRegExp(SITE_COPY.heroTitle.ja)}</title>`)],
   ["japanese language switch", "ja/index.html", /data-language-choice="en"[\s\S]*日本語/],
-  ["japanese hero", "ja/index.html", /タブを閉じずに、[\s\S]*Chromeを軽く。/],
-  ["japanese install CTA", "ja/index.html", /Tab Reliefを入手/],
-  ["japanese close feature", "ja/index.html", /条件に合うタブを閉じる[\s\S]*確認してから[\s\S]*まとめて閉じられます/],
-  ["japanese pricing", "ja/index.html", /\$1\.30[\s\S]*\/ 月[\s\S]*\$12\.99[\s\S]*\/ 年/],
+  ["japanese hero", "ja/index.html", new RegExp(escapeRegExp(SITE_COPY.heroTitle.ja))],
+  ["japanese install CTA", "ja/index.html", new RegExp(escapeRegExp(SITE_COPY.primaryCta.ja))],
+  ["japanese close feature", "ja/index.html", new RegExp(`${escapeRegExp(SITE_COPY.closeFeatureTitle.ja)}[\\s\\S]*${escapeRegExp("確認してから")}[\\s\\S]*${escapeRegExp("まとめて閉じられます")}`)],
+  ["japanese pricing", "ja/index.html", new RegExp(`${escapeRegExp("$1.30")}[\\s\\S]*${escapeRegExp("/ 月")}[\\s\\S]*${escapeRegExp("$12.99")}[\\s\\S]*${escapeRegExp("/ 年")}`)],
   ["japanese trial", "ja/index.html", /カード登録なし[\s\S]*14日間無料トライアル[\s\S]*自動で有料プランに切り替わることはありません/],
   ["japanese billing route", "ja/index.html", /「契約・支払い」画面[\s\S]*契約・支払いページ[\s\S]*管理またはキャンセル/],
   ["privacy link", "index.html", /privacy\.html/],
@@ -59,6 +61,8 @@ const checks = [
 
 const failures = [];
 
+checkSiteCopySource();
+
 for (const file of requiredFiles) {
   try {
     await readFile(path.join(root, file), "utf8");
@@ -68,6 +72,7 @@ for (const file of requiredFiles) {
 }
 
 await checkLocaleGuides(supportedLocales);
+await checkSiteCopyPresence();
 
 for (const [name, file, pattern] of checks) {
   const content = await readFile(path.join(root, file), "utf8");
@@ -186,6 +191,42 @@ if (failures.length) {
 
 console.log(`OK: ${requiredFiles.length} files and ${checks.length} content checks passed.`);
 
+function checkSiteCopySource() {
+  if (JSON.stringify(SUPPORTED_SITE_LANGUAGES) !== JSON.stringify(supportedLocales)) {
+    failures.push("SUPPORTED_SITE_LANGUAGES should match the public supported locales.");
+  }
+
+  const metadataKeys = ["surface", "intent", "constraint"];
+  for (const [key, copy] of Object.entries(SITE_COPY)) {
+    for (const metadataKey of metadataKeys) {
+      if (typeof copy[metadataKey] !== "string" || copy[metadataKey].trim().length < 8) {
+        failures.push(`SITE_COPY.${key}.${metadataKey} should explain the communication job.`);
+      }
+    }
+    for (const locale of SUPPORTED_SITE_LANGUAGES) {
+      if (typeof copy[locale] !== "string" || copy[locale].trim().length === 0) {
+        failures.push(`SITE_COPY.${key}.${locale} is missing.`);
+      }
+    }
+  }
+}
+
+async function checkSiteCopyPresence() {
+  const englishHome = await readFile(path.join(root, "index.html"), "utf8");
+  const japaneseHome = await readFile(path.join(root, "ja/index.html"), "utf8");
+  const englishReadable = readableText(englishHome);
+  const japaneseReadable = readableText(japaneseHome);
+
+  for (const [key, copy] of Object.entries(SITE_COPY)) {
+    if (!containsCopy(englishHome, englishReadable, copy.en)) {
+      failures.push(`English landing page is missing SITE_COPY.${key}.en`);
+    }
+    if (!containsCopy(japaneseHome, japaneseReadable, copy.ja)) {
+      failures.push(`Japanese landing page is missing SITE_COPY.${key}.ja`);
+    }
+  }
+}
+
 async function checkLocaleGuides(locales) {
   const requiredSections = [
     "## Native Quality Status",
@@ -207,6 +248,29 @@ async function checkLocaleGuides(locales) {
       failures.push(`${guidePath} must declare a native quality status.`);
     }
   }
+}
+
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function readableText(html) {
+  return html
+    .replace(/<script[\s\S]*?<\/script>/g, " ")
+    .replace(/<style[\s\S]*?<\/style>/g, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function containsCopy(html, readable, copy) {
+  return html.includes(copy)
+    || readable.includes(copy)
+    || compactText(readable).includes(compactText(copy));
+}
+
+function compactText(value) {
+  return String(value).replace(/\s+/g, "");
 }
 
 function simulateLanguageRoute(source, input) {

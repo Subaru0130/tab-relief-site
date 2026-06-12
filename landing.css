@@ -378,6 +378,16 @@ a:focus-visible {
   letter-spacing: -0.065em;
 }
 
+.price-box em {
+  display: block;
+  margin-top: 10px;
+  color: var(--primary);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
 .trial-note {
   margin-bottom: 16px;
   color: var(--muted);
