@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The Great Suspender no longer works in Chrome. Learn what happened and which Manifest V3 tab suspender alternatives actually work in 2026.">
+    <meta name="theme-color" content="#1f6feb">
+    <title>Tab Suspender for Chrome in 2026: MV3 Alternatives | Tab Relief</title>
+    <link rel="canonical" href="https://subaru0130.github.io/tab-relief-site/tab-suspender-chrome-mv3.html">
+    <link rel="alternate" hreflang="en" href="https://subaru0130.github.io/tab-relief-site/tab-suspender-chrome-mv3.html">
+    <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="landing.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      .article-shell { max-width: 720px; margin: 0 auto; padding: 40px 24px 80px; }
+      .article-shell h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 1.25; margin-bottom: 8px; }
+      .article-shell .meta { color: var(--muted); font-size: 0.875rem; margin-bottom: 40px; }
+      .article-shell h2 { font-size: 1.2rem; margin-top: 40px; margin-bottom: 8px; }
+      .article-shell p { margin: 0 0 16px; }
+      .article-shell ul { margin: 0 0 16px; padding-left: 24px; }
+      .article-shell li { margin-bottom: 8px; }
+      .article-shell table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-bottom: 24px; }
+      .article-shell th { text-align: left; padding: 8px 12px; background: var(--soft); border-bottom: 2px solid var(--line); }
+      .article-shell td { padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+      .article-shell .cta-box { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 24px; margin-top: 48px; }
+      .article-shell .cta-box h3 { margin: 0 0 8px; font-size: 1.05rem; }
+      .article-shell .cta-box p { margin: 0 0 16px; color: var(--muted); font-size: 0.9rem; }
+      .article-shell .cta-box .button { display: inline-block; background: var(--blue); color: #fff; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+    </style>
+    <script src="language.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" aria-label="Primary navigation">
+      <nav class="shell nav">
+        <a class="brand" href="index.html" aria-label="Tab Relief home">
+          <img src="assets/mark.svg" alt="" width="36" height="36">
+          <span>Tab Relief</span>
+        </a>
+        <div class="language-switch" aria-label="Language">
+          <a class="is-current" href="tab-suspender-chrome-mv3.html">English</a>
+          <a href="ja/" lang="ja">日本語</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <article class="article-shell">
+        <p class="eyebrow">Chrome extensions</p>
+        <h1>Tab Suspender for Chrome in 2026: What Works After Manifest V3</h1>
+        <p class="meta">6-minute read · Updated for Chrome 121+</p>
+
+        <p>The Great Suspender was the most popular tab-suspender extension for years. Then Chrome disabled it over malware concerns, and the landscape fractured. Now Chrome's Manifest V3 (MV3) migration has broken most remaining MV2 suspenders. This article explains what changed and what still works.</p>
+
+        <h2>Why classic tab suspenders stopped working</h2>
+        <p>Most legacy tab suspenders used a method called <em>URL replacement</em>: when a tab was suspended, the extension replaced the page URL with a placeholder page. This let them show a custom "sleeping" screen but meant every suspended tab held no memory of the real page — creating a separate extension page instead.</p>
+        <p>Chrome 112+ (Manifest V3) removed persistent background pages and restricted certain APIs these extensions relied on. Many simply stopped working, or lost the ability to restore tabs correctly after a browser restart.</p>
+
+        <h2>The modern approach: chrome.tabs.discard()</h2>
+        <p>Chrome now exposes <code>chrome.tabs.discard()</code>, the same API Chrome's own Memory Saver uses internally. Discarding a tab via this API:</p>
+        <ul>
+          <li>Frees the tab's memory immediately</li>
+          <li>Keeps the tab visible in the tab bar with its title and favicon</li>
+          <li>Reloads the original page when the user clicks the tab — no placeholder page</li>
+          <li>Works correctly through browser restarts</li>
+        </ul>
+        <p>Extensions built on <code>chrome.tabs.discard()</code> are natively compatible with MV3 and don't require workarounds.</p>
+
+        <h2>Comparison: approach types in 2026</h2>
+        <table>
+          <thead>
+            <tr><th>Approach</th><th>Memory freed</th><th>Tab bar</th><th>MV3 safe</th><th>Restore</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>URL replacement (legacy)</td><td>Yes</td><td>Shows custom page</td><td>No</td><td>Manual click to reload</td></tr>
+            <tr><td>chrome.tabs.discard()</td><td>Yes</td><td>Normal tab intact</td><td>Yes</td><td>Automatic on click</td></tr>
+            <tr><td>Chrome Memory Saver (built-in)</td><td>Yes</td><td>Normal tab + chip</td><td>N/A</td><td>Automatic on click</td></tr>
+          </tbody>
+        </table>
+
+        <h2>What to look for in a 2026 tab suspender</h2>
+        <ul>
+          <li><strong>Built on chrome.tabs.discard()</strong> — confirms MV3 compatibility</li>
+          <li><strong>Control over what sleeps</strong> — pinned tabs, audio tabs, and sites you're actively using should never be discarded automatically</li>
+          <li><strong>Workspace save</strong> — if you want to clear a project window entirely, you need a way to save and restore the full tab set, not just sleep individual tabs</li>
+          <li><strong>Auto-sleep with a configurable delay</strong> — "sleep everything older than X minutes" handles the browser passively without manual effort</li>
+        </ul>
+
+        <div class="cta-box">
+          <h3>Tab Relief is built on chrome.tabs.discard()</h3>
+          <p>MV3-native tab sleep, workspace save, and protected sites. 14-day free trial, no card required.</p>
+          <a class="button" href="index.html#install">Get Tab Relief</a>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer shell">
+      <p><a href="index.html">Tab Relief</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+    </footer>
+  </body>
+</html>

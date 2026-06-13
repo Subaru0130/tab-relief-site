@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Chrome using too much memory? Learn five practical ways to reduce Chrome RAM usage — including sleeping tabs, the Memory Saver setting, and workspace management — so your browser stays fast.">
+    <meta name="theme-color" content="#1f6feb">
+    <title>How to Reduce Chrome Memory Usage (2026 Guide) | Tab Relief</title>
+    <link rel="canonical" href="https://subaru0130.github.io/tab-relief-site/how-to-reduce-chrome-memory.html">
+    <link rel="alternate" hreflang="en" href="https://subaru0130.github.io/tab-relief-site/how-to-reduce-chrome-memory.html">
+    <link rel="alternate" hreflang="ja" href="https://subaru0130.github.io/tab-relief-site/ja/chrome-memory-reduce.html">
+    <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="landing.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="language.js" defer></script>
+    <style>
+      .article-shell { max-width: 720px; margin: 0 auto; padding: 40px 24px 80px; }
+      .article-shell h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 1.25; margin-bottom: 8px; }
+      .article-shell .meta { color: var(--muted); font-size: 0.875rem; margin-bottom: 40px; }
+      .article-shell h2 { font-size: 1.2rem; margin-top: 40px; margin-bottom: 8px; }
+      .article-shell p { margin: 0 0 16px; }
+      .article-shell ul { margin: 0 0 16px; padding-left: 24px; }
+      .article-shell li { margin-bottom: 8px; }
+      .article-shell .cta-box { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 24px; margin-top: 48px; }
+      .article-shell .cta-box h3 { margin: 0 0 8px; font-size: 1.05rem; }
+      .article-shell .cta-box p { margin: 0 0 16px; color: var(--muted); font-size: 0.9rem; }
+      .article-shell .cta-box .button { display: inline-block; background: var(--blue); color: #fff; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" aria-label="Primary navigation">
+      <nav class="shell nav">
+        <a class="brand" href="index.html" aria-label="Tab Relief home">
+          <img src="assets/mark.svg" alt="" width="36" height="36">
+          <span>Tab Relief</span>
+        </a>
+        <div class="language-switch" aria-label="Language">
+          <a class="is-current" href="how-to-reduce-chrome-memory.html">English</a>
+          <a href="ja/chrome-memory-reduce.html" lang="ja">日本語</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <article class="article-shell">
+        <p class="eyebrow">Chrome performance</p>
+        <h1>How to Reduce Chrome Memory Usage</h1>
+        <p class="meta">5-minute read · Applies to Chrome 121 and later</p>
+
+        <p>Chrome is the most memory-hungry browser most people use. Each open tab, extension, and background process takes a share of RAM, and on machines with 8 GB or less that adds up fast. The good news: you don't need to close your work to get Chrome back under control.</p>
+
+        <h2>1. Use Chrome's built-in Memory Saver</h2>
+        <p>Chrome 108 and later ships with a Memory Saver (called "Energy Saver" on some builds). Go to <strong>Settings → Performance</strong> and enable it. Chrome will automatically discard inactive tabs after a period of inactivity. Discarded tabs reload when you return to them.</p>
+        <p>Limitation: you can't choose which tabs get discarded, and there's no workspace-save step before Chrome clears them.</p>
+
+        <h2>2. Sleep tabs manually with an extension</h2>
+        <p>If you want to control exactly which tabs sleep — protecting pinned tabs, sites playing audio, or important research you're not done with — a dedicated tab-sleep extension adds that layer. Tab Relief uses the same underlying <code>chrome.tabs.discard()</code> API as Chrome's Memory Saver, so discarded tabs reload instantly. The difference is you decide what stays awake.</p>
+
+        <h2>3. Save your windows as workspaces before clearing</h2>
+        <p>The biggest memory drain is usually a window of 20–40 research tabs you opened for a project and never cleared. Saving that window as a named workspace takes five seconds, lets you close every tab cleanly, and restores the full set when the project comes back. This alone typically frees 300–600 MB.</p>
+
+        <h2>4. Clear duplicate and leftover tabs regularly</h2>
+        <p>Duplicate tabs — the same URL open twice because you middle-clicked by accident — are easy to miss but add up. A close-matching-tabs feature lets you sweep a domain (e.g. all YouTube tabs or all Twitter tabs) in one step, with a review screen so nothing closes unexpectedly.</p>
+
+        <h2>5. Audit your extensions</h2>
+        <p>Every active Chrome extension runs a background service worker that consumes memory. Go to <code>chrome://extensions</code> and disable any extension you haven't used in the last month. Extensions you use rarely can be left installed but switched off; they use no memory when disabled.</p>
+
+        <h2>What actually moves the needle</h2>
+        <p>In practice: sleeping 15–20 inactive tabs typically recovers 200–500 MB. Closing an unused project window of 30 tabs can recover 600 MB or more. Removing two unused extensions might recover 50–150 MB. The exact numbers depend on which sites you have open — JavaScript-heavy pages (email, social media, video) cost far more than plain text tabs.</p>
+
+        <div class="cta-box">
+          <h3>Try Tab Relief free for 14 days</h3>
+          <p>Sleep tabs, save workspaces, and clean up tab clutter — no card required to start.</p>
+          <a class="button" href="index.html#install">Get Tab Relief</a>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer shell">
+      <p><a href="index.html">Tab Relief</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+    </footer>
+  </body>
+</html>
