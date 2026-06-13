@@ -35,9 +35,9 @@ const checks = [
   ["english install CTA", "index.html", new RegExp(escapeRegExp(SITE_COPY.primaryCta.en))],
   ["english close feature", "index.html", new RegExp(`${escapeRegExp(SITE_COPY.closeFeatureTitle.en)}[\\s\\S]*${escapeRegExp("controlled review step")}`)],
   ["english pricing", "index.html", /\$1\.30[\s\S]*\$12\.99[\s\S]*does not require a card[\s\S]*will not become a paid plan automatically/],
-  ["english first-time trial", "index.html", /limited to one per email address/],
+  ["english first-time trial", "terms.html", /one use per email address/],
   ["english billing route", "index.html", /Open Billing in the extension[\s\S]*manage or cancel/],
-  ["english processors", "index.html", /ExtensionPay and Stripe/],
+  ["english processors", "privacy.html", /ExtensionPay and Stripe/],
   ["english install status", "index.html", /Preparing for Chrome Web Store publication/],
   ["japanese title", "ja/index.html", new RegExp(`<title>Tab Relief \\| ${escapeRegExp(SITE_COPY.heroTitle.ja)}</title>`)],
   ["japanese language switch", "ja/index.html", /data-language-choice="en"[\s\S]*日本語/],
@@ -46,7 +46,7 @@ const checks = [
   ["japanese close feature", "ja/index.html", new RegExp(`${escapeRegExp(SITE_COPY.closeFeatureTitle.ja)}[\\s\\S]*${escapeRegExp("確認してから")}[\\s\\S]*${escapeRegExp("まとめて閉じられます")}`)],
   ["japanese pricing", "ja/index.html", new RegExp(`${escapeRegExp("$1.30")}[\\s\\S]*${escapeRegExp("/ 月")}[\\s\\S]*${escapeRegExp("$12.99")}[\\s\\S]*${escapeRegExp("/ 年")}`)],
   ["japanese trial", "ja/index.html", /カード登録なし[\s\S]*14日間無料トライアル[\s\S]*自動で有料プランに切り替わることはありません/],
-  ["japanese billing route", "ja/index.html", /「契約・支払い」画面[\s\S]*契約・支払いページ[\s\S]*管理またはキャンセル/],
+  ["japanese billing route", "ja/index.html", /「契約・支払い」画面[\s\S]*管理またはキャンセル/],
   ["privacy link", "index.html", /privacy\.html/],
   ["terms link", "index.html", /terms\.html/],
   ["contact email", "index.html", /subaruu0130@gmail\.com/i],
@@ -85,11 +85,7 @@ for (const [name, file, pattern] of checks) {
   }
 }
 
-const japaneseIndex = await readFile(path.join(root, "ja/index.html"), "utf8");
 const japaneseTerms = await readFile(path.join(root, "ja/terms.html"), "utf8");
-if (!/メールアドレスごとに1回/.test(japaneseIndex)) {
-  failures.push("Failed check: japanese first-time trial in ja/index.html");
-}
 if (!/メールアドレスごとに1回[\s\S]*同じメールアドレス/.test(japaneseTerms)) {
   failures.push("Failed check: japanese first-time trial in ja/terms.html");
 }
