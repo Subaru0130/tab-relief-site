@@ -5,6 +5,7 @@ import { SITE_COPY, SITE_COPY_SPECS, SITE_LOCALES, SUPPORTED_SITE_LANGUAGES } fr
 
 const root = process.cwd();
 const supportedLocales = ["en", "ja"];
+const chromeWebStoreUrlPattern = /https:\/\/chromewebstore\.google\.com\/detail\/tab-relief-[^"']+\/bfjbegepdhpdmandaeoaglgphegpfeak/;
 const requiredFiles = [
   "index.html",
   "privacy.html",
@@ -38,11 +39,13 @@ const checks = [
   ["english first-time trial", "terms.html", /one use per email address/],
   ["english billing route", "index.html", /Open Billing in the extension[\s\S]*manage or cancel/],
   ["english processors", "privacy.html", /ExtensionPay and Stripe/],
-  ["english install status", "index.html", /Preparing for Chrome Web Store publication/],
+  ["english install status", "index.html", /Published and ready to install/],
+  ["english chrome web store link", "index.html", chromeWebStoreUrlPattern],
   ["japanese title", "ja/index.html", new RegExp(`<title>Tab Relief \\| ${escapeRegExp(SITE_COPY.heroTitle.ja)}</title>`)],
   ["japanese language switch", "ja/index.html", /data-language-choice="en"[\s\S]*日本語/],
   ["japanese hero", "ja/index.html", new RegExp(escapeRegExp(SITE_COPY.heroTitle.ja))],
   ["japanese install CTA", "ja/index.html", new RegExp(escapeRegExp(SITE_COPY.primaryCta.ja))],
+  ["japanese chrome web store link", "ja/index.html", chromeWebStoreUrlPattern],
   ["japanese close feature", "ja/index.html", new RegExp(`${escapeRegExp(SITE_COPY.closeFeatureTitle.ja)}[\\s\\S]*${escapeRegExp("確認してから")}[\\s\\S]*${escapeRegExp("まとめて閉じられます")}`)],
   ["japanese pricing", "ja/index.html", new RegExp(`${escapeRegExp("$1.30")}[\\s\\S]*${escapeRegExp("/ 月")}[\\s\\S]*${escapeRegExp("$12.99")}[\\s\\S]*${escapeRegExp("/ 年")}`)],
   ["japanese trial", "ja/index.html", /カード登録なし[\s\S]*14日間無料トライアル[\s\S]*自動で有料プランに切り替わることはありません/],

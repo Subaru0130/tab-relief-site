@@ -6,7 +6,7 @@ It is separate from the private extension repository on purpose: the public site
 
 ## Pages
 
-- `index.html`: product landing page, install status, and pricing
+- `index.html`: product landing page, Chrome Web Store install path, and pricing
 - `privacy.html`: privacy policy for Chrome Web Store and Stripe review
 - `terms.html`: terms, refund, and billing expectations
 - `ja/`: Japanese landing page, privacy policy, and terms
@@ -54,7 +54,7 @@ Use that URL for Stripe's website field while connecting Stripe to ExtensionPay.
 The page uses a restrained product-marketing layout inspired by mature SaaS pages from Stripe, Linear, Apple, and Material-style guidance:
 
 - Strong hero first, then benefits, features, pricing, FAQ, and legal links.
-- Install is treated as the primary product action. Before Chrome Web Store approval, the page shows a clear pre-launch status instead of pretending the store link is live.
+- Install is treated as the primary product action. The page links directly to the live Chrome Web Store listing.
 - One primary action color: blue for install and subscription actions.
 - Neutral surfaces and consistent card spacing so the content feels calmer than the extension problem it solves.
 - Legal, payment, cancellation, and billing-management information is visible instead of hidden, which helps Stripe review and user trust.
@@ -62,8 +62,7 @@ The page uses a restrained product-marketing layout inspired by mature SaaS page
 - Mobile layout collapses into a single-column flow with full-width primary actions.
 - English remains the default review URL, while Japanese users can be routed to `/ja/` through browser-language detection or a visible language switch.
 
-## Update before final launch
+## Update after launch
 
-- Replace the install status with the Chrome Web Store URL after publication.
 - Update the contact email if a dedicated support address is created.
 - Confirm final pricing in ExtensionPay and keep the page in sync.

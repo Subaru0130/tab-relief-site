@@ -14,12 +14,12 @@ export const SITE_COPY_SPECS = {
   },
   primaryCta: {
     surface: "landing hero",
-    intent: "Point users to the install path, even while the Chrome Web Store listing is still pending.",
-    constraint: "Short CTA. It should not sound like a support inquiry."
+    intent: "Point users directly to the live Chrome Web Store install path.",
+    constraint: "Short CTA. It should clearly feel like the next step to install the extension."
   },
   trialNote: {
     surface: "landing hero",
-    intent: "Clarify install status and the card-free 14-day trial before users click.",
+    intent: "Clarify that install is free and the cleanup actions include a card-free 14-day trial.",
     constraint: "Plain product note. Do not imply automatic paid conversion."
   },
   closeFeatureTitle: {
