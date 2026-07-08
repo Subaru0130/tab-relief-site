@@ -331,7 +331,6 @@ a:focus-visible {
   padding: 26px;
 }
 
-.status-box,
 .trial-note,
 .price-box {
   border: 1px solid var(--line);
@@ -340,7 +339,6 @@ a:focus-visible {
   background: #fbfdff;
 }
 
-.status-box span,
 .price-box span {
   display: block;
   color: var(--muted);
@@ -349,18 +347,10 @@ a:focus-visible {
   text-transform: uppercase;
 }
 
-.status-box strong {
-  display: block;
-  margin-top: 8px;
-  font-size: 24px;
-  line-height: 1.1;
-  letter-spacing: -0.045em;
-}
-
 .stack-actions {
   display: grid;
   gap: 10px;
-  margin-top: 16px;
+  margin-top: 0;
 }
 
 .price-row {

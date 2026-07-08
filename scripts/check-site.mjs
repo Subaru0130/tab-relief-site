@@ -39,7 +39,7 @@ const checks = [
   ["english first-time trial", "terms.html", /one use per email address/],
   ["english billing route", "index.html", /Open Billing in the extension[\s\S]*manage or cancel/],
   ["english processors", "privacy.html", /ExtensionPay and Stripe/],
-  ["english install status", "index.html", /Available now/],
+  ["english install action", "index.html", /Install from Chrome Web Store/],
   ["english chrome web store link", "index.html", chromeWebStoreUrlPattern],
   ["japanese title", "ja/index.html", new RegExp(`<title>Tab Relief \\| ${escapeRegExp(SITE_COPY.heroTitle.ja)}</title>`)],
   ["japanese language switch", "ja/index.html", /data-language-choice="en"[\s\S]*日本語/],
