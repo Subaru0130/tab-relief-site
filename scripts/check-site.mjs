@@ -13,6 +13,25 @@ const trackedStorePages = new Map([
   ["tab-suspender-chrome-mv3.html", "seo_tab_suspender_mv3_en"],
   ["ja/chrome-memory-reduce.html", "seo_chrome_memory_ja"]
 ]);
+const articleAccuracyChecks = [
+  ["how-to-reduce-chrome-memory.html", [
+    "https://support.google.com/chrome/answer/12929150?hl=en",
+    "https://support.google.com/chrome/answer/1385029?hl=en",
+    "https://developer.chrome.com/docs/extensions/reference/api/tabs#method-discard",
+    "https://developer.chrome.com/docs/extensions/develop/concepts/service-workers/lifecycle"
+  ]],
+  ["tab-suspender-chrome-mv3.html", [
+    "https://support.google.com/chrome/answer/12929150?hl=en",
+    "https://developer.chrome.com/docs/extensions/reference/api/tabs#method-discard",
+    "https://developer.chrome.com/docs/extensions/develop/concepts/service-workers/lifecycle"
+  ]],
+  ["ja/chrome-memory-reduce.html", [
+    "https://support.google.com/chrome/answer/12929150?hl=ja",
+    "https://support.google.com/chrome/answer/1385029?hl=ja",
+    "https://developer.chrome.com/docs/extensions/reference/api/tabs#method-discard",
+    "https://developer.chrome.com/docs/extensions/develop/concepts/service-workers/lifecycle"
+  ]]
+];
 const requiredFiles = [
   "index.html",
   "privacy.html",
@@ -88,6 +107,7 @@ for (const file of requiredFiles) {
 await checkLocaleGuides(supportedLocales);
 await checkSiteCopyPresence();
 await checkTrackedStoreLinks();
+await checkArticleAccuracy();
 
 for (const [name, file, pattern] of checks) {
   const content = await readFile(path.join(root, file), "utf8");
@@ -315,6 +335,32 @@ async function checkTrackedStoreLinks() {
 
       if (!trackedUrl.searchParams.get("utm_content")) {
         failures.push(`${file} store link must include utm_content.`);
+      }
+    }
+  }
+}
+
+async function checkArticleAccuracy() {
+  const forbiddenClaims = [
+    /Memory Saver \(called ["']Energy Saver["'] on some builds\)/i,
+    /same (?:underlying )?<code>chrome\.tabs\.discard\(\)<\/code> API as Chrome(?:'s|’s) Memory Saver/i,
+    /same<code>chrome\.tabs\.discard\(\)<\/code>API/i,
+    /Every active Chrome extension runs a background service worker that consumes memory/i,
+    /有効になっているChrome拡張機能は、それぞれバックグラウンドで動作しメモリを消費します/,
+    /(?:typically frees|typically recovers|回収できます|解放されることがあります)[^<]*\d+[^<]*MB/i,
+    /\d+[–〜-]\d+\s*MB[^<]*(?:frees|recovers|回収|解放)/i
+  ];
+
+  for (const [file, requiredSources] of articleAccuracyChecks) {
+    const content = await readFile(path.join(root, file), "utf8");
+    for (const source of requiredSources) {
+      if (!content.includes(source)) {
+        failures.push(`${file} is missing official source: ${source}`);
+      }
+    }
+    for (const claim of forbiddenClaims) {
+      if (claim.test(content)) {
+        failures.push(`Unsupported or misleading claim found in ${file}: ${claim}`);
       }
     }
   }

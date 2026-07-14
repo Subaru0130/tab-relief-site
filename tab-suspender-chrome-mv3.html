@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="The Great Suspender no longer works in Chrome. Learn what happened and which Manifest V3 tab suspender alternatives actually work in 2026.">
+    <meta name="description" content="Learn how modern Chrome tab sleeping works under Manifest V3, what chrome.tabs.discard() does, and how to evaluate a tab manager safely.">
     <meta name="theme-color" content="#1f6feb">
     <title>Tab Suspender for Chrome in 2026: MV3 Alternatives | Tab Relief</title>
     <link rel="canonical" href="https://subaru0130.github.io/tab-relief-site/tab-suspender-chrome-mv3.html">
@@ -47,48 +47,55 @@
     <main id="main">
       <article class="article-shell">
         <p class="eyebrow">Chrome extensions</p>
-        <h1>Tab Suspender for Chrome in 2026: What Works After Manifest V3</h1>
-        <p class="meta">6-minute read · Updated for Chrome 121+</p>
+        <h1>Tab Suspender for Chrome in 2026: What to Check Under Manifest V3</h1>
+        <p class="meta">6-minute read · Reviewed July 2026</p>
 
-        <p>The Great Suspender was the most popular tab-suspender extension for years. Then Chrome disabled it over malware concerns, and the landscape fractured. Now Chrome's Manifest V3 (MV3) migration has broken most remaining MV2 suspenders. This article explains what changed and what still works.</p>
+        <p>Modern Chrome tab managers should be judged by what they do with your tabs, which permissions they request, and how clearly they protect active work. Manifest V3 changes an extension's background architecture, but it does not by itself prove that a tab manager is safe or reliable.</p>
 
-        <h2>Why classic tab suspenders stopped working</h2>
-        <p>Most legacy tab suspenders used a method called <em>URL replacement</em>: when a tab was suspended, the extension replaced the page URL with a placeholder page. This let them show a custom "sleeping" screen but meant every suspended tab held no memory of the real page — creating a separate extension page instead.</p>
-        <p>Chrome 112+ (Manifest V3) removed persistent background pages and restricted certain APIs these extensions relied on. Many simply stopped working, or lost the ability to restore tabs correctly after a browser restart.</p>
+        <h2>What Manifest V3 changes</h2>
+        <p>Manifest V3 extensions use service workers for background event handling instead of long-lived background pages. Chrome normally stops an extension service worker after a period of inactivity and starts it again when an event needs handling.</p>
+        <p>That means a well-designed tab manager must store important state rather than relying on in-memory global variables. It should also recover cleanly after Chrome restarts or the service worker wakes again.</p>
 
         <h2>The modern approach: chrome.tabs.discard()</h2>
-        <p>Chrome now exposes <code>chrome.tabs.discard()</code>, the same API Chrome's own Memory Saver uses internally. Discarding a tab via this API:</p>
+        <p>Chrome provides <code>chrome.tabs.discard()</code> to extensions. When Chrome accepts the request, it:</p>
         <ul>
-          <li>Frees the tab's memory immediately</li>
-          <li>Keeps the tab visible in the tab bar with its title and favicon</li>
-          <li>Reloads the original page when the user clicks the tab — no placeholder page</li>
-          <li>Works correctly through browser restarts</li>
+          <li>Discards the tab from memory</li>
+          <li>Keeps the tab visible in the tab strip</li>
+          <li>Reloads the page when the tab is activated again</li>
         </ul>
-        <p>Extensions built on <code>chrome.tabs.discard()</code> are natively compatible with MV3 and don't require workarounds.</p>
+        <p>The API will not discard an active or already discarded tab, and a request can fail if Chrome has no eligible tab. An extension should therefore show which tabs are eligible and report the result instead of promising that every tab will sleep.</p>
 
-        <h2>Comparison: approach types in 2026</h2>
+        <h2>Three ways to reduce open-tab pressure</h2>
         <table>
           <thead>
-            <tr><th>Approach</th><th>Memory freed</th><th>Tab bar</th><th>MV3 safe</th><th>Restore</th></tr>
+            <tr><th>Approach</th><th>Best for</th><th>What happens</th></tr>
           </thead>
           <tbody>
-            <tr><td>URL replacement (legacy)</td><td>Yes</td><td>Shows custom page</td><td>No</td><td>Manual click to reload</td></tr>
-            <tr><td>chrome.tabs.discard()</td><td>Yes</td><td>Normal tab intact</td><td>Yes</td><td>Automatic on click</td></tr>
-            <tr><td>Chrome Memory Saver (built-in)</td><td>Yes</td><td>Normal tab + chip</td><td>N/A</td><td>Automatic on click</td></tr>
+            <tr><td>Chrome Memory Saver</td><td>Automatic everyday management</td><td>Chrome deactivates unused tabs and reloads them when needed</td></tr>
+            <tr><td>User-reviewed tab sleep</td><td>Choosing specific background tabs</td><td>An extension requests discard only for the eligible tabs you approve</td></tr>
+            <tr><td>Workspace save and close</td><td>Putting a whole project aside</td><td>Restorable web tabs are saved, then closed and reopened later</td></tr>
           </tbody>
         </table>
 
         <h2>What to look for in a 2026 tab suspender</h2>
         <ul>
-          <li><strong>Built on chrome.tabs.discard()</strong> — confirms MV3 compatibility</li>
-          <li><strong>Control over what sleeps</strong> — pinned tabs, audio tabs, and sites you're actively using should never be discarded automatically</li>
-          <li><strong>Workspace save</strong> — if you want to clear a project window entirely, you need a way to save and restore the full tab set, not just sleep individual tabs</li>
-          <li><strong>Auto-sleep with a configurable delay</strong> — "sleep everything older than X minutes" handles the browser passively without manual effort</li>
+          <li><strong>A visible review step</strong>: you should know which tabs will be affected before an action runs.</li>
+          <li><strong>Clear protections</strong>: active, pinned, audible, local, and explicitly protected tabs should not be selected by default.</li>
+          <li><strong>Recoverable state</strong>: workspaces and settings should survive service-worker restarts.</li>
+          <li><strong>Purpose-limited permissions</strong>: the store listing should explain why tab, storage, alarm, group, and host access are needed.</li>
+          <li><strong>Honest estimates</strong>: memory savings vary by page and system; a fixed per-tab promise is not credible.</li>
+        </ul>
+
+        <h2>Official references</h2>
+        <ul>
+          <li><a href="https://developer.chrome.com/docs/extensions/reference/api/tabs#method-discard" target="_blank" rel="noopener">Chrome for Developers: <code>chrome.tabs.discard()</code></a></li>
+          <li><a href="https://developer.chrome.com/docs/extensions/develop/concepts/service-workers/lifecycle" target="_blank" rel="noopener">Chrome for Developers: extension service worker lifecycle</a></li>
+          <li><a href="https://support.google.com/chrome/answer/12929150?hl=en" target="_blank" rel="noopener">Google Chrome Help: Memory Saver</a></li>
         </ul>
 
         <div class="cta-box">
-          <h3>Tab Relief is built on chrome.tabs.discard()</h3>
-          <p>MV3-native tab sleep, workspace save, and protected sites. 14-day free trial, no card required.</p>
+          <h3>Try deliberate tab cleanup with Tab Relief</h3>
+          <p>Review eligible tabs, save workspaces, and protect important sites. Start the 14-day trial without a card.</p>
           <a class="button" href="https://chromewebstore.google.com/detail/tab-relief-%E2%80%94-%E3%82%BF%E3%83%96%E3%82%92%E3%82%B9%E3%83%AA%E3%83%BC%E3%83%97%E3%81%97%E3%81%A6chr/bfjbegepdhpdmandaeoaglgphegpfeak?utm_source=tab_relief_site&amp;utm_medium=referral&amp;utm_campaign=seo_tab_suspender_mv3_en&amp;utm_content=article_cta" target="_blank" rel="noopener">Get Tab Relief</a>
         </div>
       </article>

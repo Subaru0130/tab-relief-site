@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Chrome using too much memory? Learn five practical ways to reduce Chrome RAM usage — including sleeping tabs, the Memory Saver setting, and workspace management — so your browser stays fast.">
+    <meta name="description" content="Chrome using too much memory? Learn five practical ways to reduce RAM use without losing your tabs, including Memory Saver, manual tab sleep, and workspaces.">
     <meta name="theme-color" content="#1f6feb">
     <title>How to Reduce Chrome Memory Usage (2026 Guide) | Tab Relief</title>
     <link rel="canonical" href="https://subaru0130.github.io/tab-relief-site/how-to-reduce-chrome-memory.html">
@@ -46,28 +46,37 @@
       <article class="article-shell">
         <p class="eyebrow">Chrome performance</p>
         <h1>How to Reduce Chrome Memory Usage</h1>
-        <p class="meta">5-minute read · Applies to Chrome 121 and later</p>
+        <p class="meta">5-minute read · Reviewed July 2026</p>
 
-        <p>Chrome is the most memory-hungry browser most people use. Each open tab, extension, and background process takes a share of RAM, and on machines with 8 GB or less that adds up fast. The good news: you don't need to close your work to get Chrome back under control.</p>
+        <p>Chrome's memory use can grow as tabs, extensions, and background tasks accumulate. You do not have to close important work at random: start with Chrome's built-in controls, then use more deliberate tools only where they add useful control.</p>
 
         <h2>1. Use Chrome's built-in Memory Saver</h2>
-        <p>Chrome 108 and later ships with a Memory Saver (called "Energy Saver" on some builds). Go to <strong>Settings → Performance</strong> and enable it. Chrome will automatically discard inactive tabs after a period of inactivity. Discarded tabs reload when you return to them.</p>
-        <p>Limitation: you can't choose which tabs get discarded, and there's no workspace-save step before Chrome clears them.</p>
+        <p>Open <strong>Settings → Performance</strong> and turn on Memory Saver. Chrome deactivates tabs you are not using and reloads them when you return. You can choose how aggressively it works and add sites to <strong>Always keep these sites active</strong>.</p>
+        <p>Memory Saver and Energy Saver are separate features. Memory Saver manages inactive tabs; Energy Saver reduces power use when your device is unplugged or the battery is low.</p>
 
         <h2>2. Sleep tabs manually with an extension</h2>
-        <p>If you want to control exactly which tabs sleep — protecting pinned tabs, sites playing audio, or important research you're not done with — a dedicated tab-sleep extension adds that layer. Tab Relief uses the same underlying <code>chrome.tabs.discard()</code> API as Chrome's Memory Saver, so discarded tabs reload instantly. The difference is you decide what stays awake.</p>
+        <p>A tab manager is useful when you want to review the exact tabs first. Tab Relief uses Chrome's <code>chrome.tabs.discard()</code> extension API for its sleep action. Chrome removes an eligible tab from memory while keeping it visible in the tab strip, then reloads the page when you activate it again.</p>
+        <p>Tab Relief leaves active, pinned, audible, local, and protected tabs out of its normal sleep selection. This is an extra layer of user control, not a replacement for Chrome's built-in Memory Saver.</p>
 
         <h2>3. Save your windows as workspaces before clearing</h2>
-        <p>The biggest memory drain is usually a window of 20–40 research tabs you opened for a project and never cleared. Saving that window as a named workspace takes five seconds, lets you close every tab cleanly, and restores the full set when the project comes back. This alone typically frees 300–600 MB.</p>
+        <p>If a project is finished for now, save its restorable web tabs as a named workspace before closing them. This reduces the number of open tabs while preserving a convenient way to reopen the set later. The memory released depends on the pages, Chrome, and the operating system, so no fixed amount can be promised.</p>
 
         <h2>4. Clear duplicate and leftover tabs regularly</h2>
-        <p>Duplicate tabs — the same URL open twice because you middle-clicked by accident — are easy to miss but add up. A close-matching-tabs feature lets you sweep a domain (e.g. all YouTube tabs or all Twitter tabs) in one step, with a review screen so nothing closes unexpectedly.</p>
+        <p>Duplicate and leftover tabs are easy to miss. Use search or a matching rule to gather tabs by title, domain, or URL, review the matches, and close only the ones you no longer need. Review matters because closing a tab is different from putting it to sleep.</p>
 
         <h2>5. Audit your extensions</h2>
-        <p>Every active Chrome extension runs a background service worker that consumes memory. Go to <code>chrome://extensions</code> and disable any extension you haven't used in the last month. Extensions you use rarely can be left installed but switched off; they use no memory when disabled.</p>
+        <p>Open Chrome's Task Manager to see which tabs and extensions are using resources, then review anything you no longer need at <code>chrome://extensions</code>. Manifest V3 background service workers normally stop after a period of inactivity, so an installed extension is not necessarily consuming memory continuously. Measure before removing tools you still use.</p>
 
         <h2>What actually moves the needle</h2>
-        <p>In practice: sleeping 15–20 inactive tabs typically recovers 200–500 MB. Closing an unused project window of 30 tabs can recover 600 MB or more. Removing two unused extensions might recover 50–150 MB. The exact numbers depend on which sites you have open — JavaScript-heavy pages (email, social media, video) cost far more than plain text tabs.</p>
+        <p>Use Chrome's Task Manager or your operating system's memory view before and after a change. Pages with video, complex web apps, or active background work may use far more memory than simple documents. Chrome and the operating system also decide when released memory is reflected in system totals, so compare under the same conditions instead of relying on a universal per-tab estimate.</p>
+
+        <h2>Official references</h2>
+        <ul>
+          <li><a href="https://support.google.com/chrome/answer/12929150?hl=en" target="_blank" rel="noopener">Google Chrome Help: Memory Saver and Energy Saver</a></li>
+          <li><a href="https://support.google.com/chrome/answer/1385029?hl=en" target="_blank" rel="noopener">Google Chrome Help: speed up Chrome</a></li>
+          <li><a href="https://developer.chrome.com/docs/extensions/reference/api/tabs#method-discard" target="_blank" rel="noopener">Chrome for Developers: <code>chrome.tabs.discard()</code></a></li>
+          <li><a href="https://developer.chrome.com/docs/extensions/develop/concepts/service-workers/lifecycle" target="_blank" rel="noopener">Chrome for Developers: extension service worker lifecycle</a></li>
+        </ul>
 
         <div class="cta-box">
           <h3>Try Tab Relief free for 14 days</h3>

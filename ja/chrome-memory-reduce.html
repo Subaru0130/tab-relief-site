@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Chromeのメモリ使用量を減らす5つの方法を解説。タブのスリープ、ワークスペース保存、メモリセーバーの活用など、作業を失わずにChromeを軽くする実践的な手順。">
+    <meta name="description" content="大切なタブを失わずにChromeのメモリ使用量を抑える5つの方法を解説。メモリセーバー、タブの休止、ワークスペースを正しく使い分けます。">
     <meta name="theme-color" content="#1f6feb">
-    <title>Chromeのメモリを減らす方法(2026年版) | Tab Relief</title>
+    <title>Chromeのメモリ使用量を抑える5つの方法 | Tab Relief</title>
     <link rel="canonical" href="https://subaru0130.github.io/tab-relief-site/ja/chrome-memory-reduce.html">
     <link rel="alternate" hreflang="en" href="https://subaru0130.github.io/tab-relief-site/how-to-reduce-chrome-memory.html">
     <link rel="alternate" hreflang="ja" href="https://subaru0130.github.io/tab-relief-site/ja/chrome-memory-reduce.html">
@@ -45,29 +45,38 @@
     <main id="main">
       <article class="article-shell">
         <p class="eyebrow">Chrome パフォーマンス</p>
-        <h1>Chromeのメモリ使用量を減らす5つの方法</h1>
-        <p class="meta">読了目安5分 · Chrome 121以降対応</p>
+        <h1>Chromeのメモリ使用量を抑える5つの方法</h1>
+        <p class="meta">読了目安5分 · 2026年7月確認</p>
 
-        <p>Chromeは多くの人が使うブラウザの中でも特にメモリを消費します。開いているタブ、拡張機能、バックグラウンドのプロセスがそれぞれRAMを使い、8GB以下のマシンでは体感できるほど重くなります。ただし、作業中のタブを閉じなくても軽くする方法はあります。</p>
+        <p>タブや拡張機能、バックグラウンド処理が増えると、Chromeのメモリ使用量も増えていきます。大切な作業をむやみに閉じるのではなく、まずChrome標準の機能を使い、必要に応じてタブ管理を補うのが安全です。</p>
 
         <h2>1. Chrome標準の「メモリセーバー」を使う</h2>
-        <p>Chrome 108以降は「メモリセーバー」機能を搭載しています。<strong>設定 → パフォーマンス</strong>でオンにすると、しばらく使っていないタブが自動で休止されメモリが解放されます。タブを開き直すと通常通り再読み込みされます。</p>
-        <p>制限: どのタブを休止するかを細かく制御できず、ウィンドウごと丸ごと保存してから片付ける機能はありません。</p>
+        <p><strong>設定 → パフォーマンス</strong>でメモリセーバーをオンにすると、使っていないタブが自動で休止し、戻ったときに再読み込みされます。タブを休止する頻度を選べるほか、常に有効にしておきたいサイトも指定できます。</p>
+        <p>「メモリセーバー」と「省エネモード」は別の機能です。前者は使っていないタブを休止し、後者はバッテリー消費を抑えます。</p>
 
         <h2>2. 拡張機能でタブを手動スリープする</h2>
-        <p>ピン留めしたタブや音声再生中のタブ、まだ読んでいる調べ物は休止させたくない、という場合は専用の拡張機能で制御できます。Tab Reliefはメモリセーバーと同じ<code>chrome.tabs.discard()</code>APIを使用しているため、タブは瞬時に復帰します。違いは「何を休止するか」を自分で決められる点です。</p>
+        <p>休止するタブを自分で確認したい場合は、タブ管理用の拡張機能が役立ちます。Tab Reliefの休止操作にはChromeの<code>chrome.tabs.discard()</code> APIを使っています。対象のタブは一覧に残り、再び開くとページが読み込まれます。</p>
+        <p>Tab Reliefでは通常、使用中、ピン留め、音声再生中、ローカルページ、保護済みサイトを選択から外します。Chrome標準機能を置き換えるのではなく、手動で整理したいときの選択肢です。</p>
 
         <h2>3. ウィンドウをワークスペースとして保存してから閉じる</h2>
-        <p>メモリを大量消費しがちなのは、プロジェクト用に開いた20〜40枚のタブをまとめたウィンドウです。そのウィンドウを「ワークスペース」として名前をつけて保存すれば、タブを全部閉じてスッキリさせた後、必要なときにまとめて復元できます。これだけで300〜600MBが解放されることがあります。</p>
+        <p>作業をいったん中断する場合は、開き直せるWebページをワークスペースとして保存してから閉じると整理しやすくなります。必要になったら、保存したタブをまとめて開き直せます。減るメモリ量はページの内容やChrome、OSの状態によって変わるため、一定の数値は保証できません。</p>
 
         <h2>4. 重複タブや溜まったタブをまとめて片付ける</h2>
-        <p>同じURLを誤って2回開いた重複タブは気づきにくいけれど積み重なります。一致タブの整理機能を使えば、たとえば「YouTubeのタブをまとめて閉じる」「Amazonのタブだけ選んで片付ける」といった操作を確認画面付きで安全に行えます。</p>
+        <p>重複タブや、あとで見るつもりで残したタブは気づかないうちに増えます。タイトル、ドメイン、URLで候補を絞り、対象を確認してから不要なものだけ閉じます。タブを閉じる操作は休止と異なるため、確認を省かないことが大切です。</p>
 
         <h2>5. 拡張機能の数を見直す</h2>
-        <p>有効になっているChrome拡張機能は、それぞれバックグラウンドで動作しメモリを消費します。<code>chrome://extensions</code>を開き、1か月以上使っていない拡張機能はオフにしましょう。無効化するだけでメモリ使用量はゼロになります。</p>
+        <p>Chromeのタスクマネージャーで、タブや拡張機能ごとの使用状況を確認できます。不要な拡張機能は<code>chrome://extensions</code>で見直しましょう。Manifest V3のバックグラウンド処理は、通常、一定時間使われなければ停止するため、インストール済みの拡張機能が常にメモリを使い続けるとは限りません。</p>
 
-        <h2>実際にどれくらい変わるか</h2>
-        <p>目安として: 15〜20枚の非アクティブタブをスリープすると200〜500MB程度回収できます。使い終わったプロジェクトウィンドウ(30タブ前後)を閉じると600MB以上回収できることもあります。数値はどのサイトを開いているかによって大きく変わります。メール・SNS・動画など、JavaScriptを多く使うページは特にメモリを消費します。</p>
+        <h2>効果は同じ条件で確かめる</h2>
+        <p>操作の前後でChromeのタスクマネージャーやWindowsのメモリ表示を比べます。動画、Webアプリ、バックグラウンド処理のあるページは、単純な文書ページより多くのメモリを使うことがあります。解放されたメモリがシステム全体の表示にすぐ反映されない場合もあるため、「1タブあたり何MB」と一律には判断できません。</p>
+
+        <h2>公式情報</h2>
+        <ul>
+          <li><a href="https://support.google.com/chrome/answer/12929150?hl=ja" target="_blank" rel="noopener">Google Chrome ヘルプ: メモリセーバーと省エネモード</a></li>
+          <li><a href="https://support.google.com/chrome/answer/1385029?hl=ja" target="_blank" rel="noopener">Google Chrome ヘルプ: Chromeを高速化する</a></li>
+          <li><a href="https://developer.chrome.com/docs/extensions/reference/api/tabs#method-discard" target="_blank" rel="noopener">Chrome for Developers: <code>chrome.tabs.discard()</code></a></li>
+          <li><a href="https://developer.chrome.com/docs/extensions/develop/concepts/service-workers/lifecycle" target="_blank" rel="noopener">Chrome for Developers: 拡張機能のService Workerのライフサイクル</a></li>
+        </ul>
 
         <div class="cta-box">
           <h3>Tab Reliefを14日間無料で試す</h3>
