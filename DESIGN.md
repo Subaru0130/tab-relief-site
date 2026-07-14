@@ -38,6 +38,7 @@ Tab Relief keeps Chrome lighter without forcing the user to close important tabs
 
 - English should sound like a polished SaaS product, not technical documentation.
 - Japanese should be natural product Japanese, not literal translation.
+- Before writing Japanese long-form copy, follow `docs/locales/ja.md` from the fact-and-intent stage. Do not draft while looking at English sentences, and do not preserve the English heading or paragraph structure.
 - Write the hero line directly for the locale. Do not mirror English fragment-by-fragment.
 - Add landing-page copy intent in `copy/site-spec.mjs`, not directly in HTML or `copy/site-copy.mjs`.
 - Write locale strings in `copy/locales/<language>.mjs`; keep enabled languages in `copy/registry.mjs`.

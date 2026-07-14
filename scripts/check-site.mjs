@@ -108,6 +108,7 @@ await checkLocaleGuides(supportedLocales);
 await checkSiteCopyPresence();
 await checkTrackedStoreLinks();
 await checkArticleAccuracy();
+await checkJapaneseEditorialStructure();
 
 for (const [name, file, pattern] of checks) {
   const content = await readFile(path.join(root, file), "utf8");
@@ -361,6 +362,36 @@ async function checkArticleAccuracy() {
     for (const claim of forbiddenClaims) {
       if (claim.test(content)) {
         failures.push(`Unsupported or misleading claim found in ${file}: ${claim}`);
+      }
+    }
+  }
+}
+
+async function checkJapaneseEditorialStructure() {
+  const files = articleAccuracyChecks
+    .map(([file]) => file)
+    .filter((file) => file.startsWith("ja/"));
+
+  for (const file of files) {
+    const content = await readFile(path.join(root, file), "utf8");
+    if (/<p class="meta">/.test(content) || /読了目安|最終確認日|制作中/.test(content)) {
+      failures.push(`${file} should not show editorial metadata that does not help the reader.`);
+    }
+
+    const headings = [...content.matchAll(/<h2>([\s\S]*?)<\/h2>/g)]
+      .map((match) => readableText(match[1]));
+    for (const heading of headings) {
+      if (heading.length > 30) {
+        failures.push(`${file} has an overlong Japanese heading: ${heading}`);
+      }
+    }
+
+    const paragraphs = [...content.matchAll(/<p>([\s\S]*?)<\/p>/g)]
+      .map((match) => readableText(match[1]));
+    for (const paragraph of paragraphs) {
+      const sentences = paragraph.split(/[。！？]/).map((sentence) => sentence.trim()).filter(Boolean);
+      if (sentences.some((sentence) => sentence.length > 90)) {
+        failures.push(`${file} has a Japanese sentence that is too long for an easy read: ${paragraph}`);
       }
     }
   }
