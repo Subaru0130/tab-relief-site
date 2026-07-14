@@ -6,6 +6,13 @@ import { SITE_COPY, SITE_COPY_SPECS, SITE_LOCALES, SUPPORTED_SITE_LANGUAGES } fr
 const root = process.cwd();
 const supportedLocales = ["en", "ja"];
 const chromeWebStoreUrlPattern = /https:\/\/chromewebstore\.google\.com\/detail\/tab-relief-[^"']+\/bfjbegepdhpdmandaeoaglgphegpfeak/;
+const trackedStorePages = new Map([
+  ["index.html", "homepage_en"],
+  ["ja/index.html", "homepage_ja"],
+  ["how-to-reduce-chrome-memory.html", "seo_chrome_memory_en"],
+  ["tab-suspender-chrome-mv3.html", "seo_tab_suspender_mv3_en"],
+  ["ja/chrome-memory-reduce.html", "seo_chrome_memory_ja"]
+]);
 const requiredFiles = [
   "index.html",
   "privacy.html",
@@ -80,6 +87,7 @@ for (const file of requiredFiles) {
 
 await checkLocaleGuides(supportedLocales);
 await checkSiteCopyPresence();
+await checkTrackedStoreLinks();
 
 for (const [name, file, pattern] of checks) {
   const content = await readFile(path.join(root, file), "utf8");
@@ -277,6 +285,37 @@ async function checkLocaleGuides(locales) {
     }
     if (!/Status:\s*production-supported|Status:\s*native-reviewed|Status:\s*blocked-until-native-review/.test(guide)) {
       failures.push(`${guidePath} must declare a native quality status.`);
+    }
+  }
+}
+
+async function checkTrackedStoreLinks() {
+  for (const [file, expectedCampaign] of trackedStorePages) {
+    const content = await readFile(path.join(root, file), "utf8");
+    const links = [...content.matchAll(/href="([^"]*chromewebstore\.google\.com\/detail\/[^"]*bfjbegepdhpdmandaeoaglgphegpfeak[^"]*)"/g)];
+
+    if (!links.length) {
+      failures.push(`No Chrome Web Store link found in ${file}.`);
+      continue;
+    }
+
+    for (const [, rawHref] of links) {
+      const trackedUrl = new URL(rawHref.replaceAll("&amp;", "&"));
+      const expected = {
+        utm_source: "tab_relief_site",
+        utm_medium: "referral",
+        utm_campaign: expectedCampaign
+      };
+
+      for (const [parameter, value] of Object.entries(expected)) {
+        if (trackedUrl.searchParams.get(parameter) !== value) {
+          failures.push(`${file} store link must set ${parameter}=${value}.`);
+        }
+      }
+
+      if (!trackedUrl.searchParams.get("utm_content")) {
+        failures.push(`${file} store link must include utm_content.`);
+      }
     }
   }
 }
