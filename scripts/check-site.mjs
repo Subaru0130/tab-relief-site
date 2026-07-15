@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import vm from "node:vm";
 import { SITE_COPY, SITE_COPY_SPECS, SITE_LOCALES, SUPPORTED_SITE_LANGUAGES } from "../copy/site-copy.mjs";
@@ -9,25 +9,11 @@ const chromeWebStoreUrlPattern = /https:\/\/chromewebstore\.google\.com\/detail\
 const trackedStorePages = new Map([
   ["index.html", "homepage_en"],
   ["ja/index.html", "homepage_ja"],
-  ["how-to-reduce-chrome-memory.html", "seo_chrome_memory_en"],
-  ["tab-suspender-chrome-mv3.html", "seo_tab_suspender_mv3_en"],
-  ["ja/chrome-memory-reduce.html", "seo_chrome_memory_ja"]
+  ["tab-suspender-chrome-mv3.html", "seo_tab_suspender_mv3_en"]
 ]);
 const articleAccuracyChecks = [
-  ["how-to-reduce-chrome-memory.html", [
-    "https://support.google.com/chrome/answer/12929150?hl=en",
-    "https://support.google.com/chrome/answer/1385029?hl=en",
-    "https://developer.chrome.com/docs/extensions/reference/api/tabs#method-discard",
-    "https://developer.chrome.com/docs/extensions/develop/concepts/service-workers/lifecycle"
-  ]],
   ["tab-suspender-chrome-mv3.html", [
     "https://support.google.com/chrome/answer/12929150?hl=en",
-    "https://developer.chrome.com/docs/extensions/reference/api/tabs#method-discard",
-    "https://developer.chrome.com/docs/extensions/develop/concepts/service-workers/lifecycle"
-  ]],
-  ["ja/chrome-memory-reduce.html", [
-    "https://support.google.com/chrome/answer/12929150?hl=ja",
-    "https://support.google.com/chrome/answer/1385029?hl=ja",
     "https://developer.chrome.com/docs/extensions/reference/api/tabs#method-discard",
     "https://developer.chrome.com/docs/extensions/develop/concepts/service-workers/lifecycle"
   ]]
@@ -368,9 +354,10 @@ async function checkArticleAccuracy() {
 }
 
 async function checkJapaneseEditorialStructure() {
-  const files = articleAccuracyChecks
-    .map(([file]) => file)
-    .filter((file) => file.startsWith("ja/"));
+  const reservedPages = new Set(["index.html", "privacy.html", "terms.html"]);
+  const files = (await readdir(path.join(root, "ja"), { withFileTypes: true }))
+    .filter((entry) => entry.isFile() && entry.name.endsWith(".html") && !reservedPages.has(entry.name))
+    .map((entry) => `ja/${entry.name}`);
 
   for (const file of files) {
     const content = await readFile(path.join(root, file), "utf8");
